@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -13,6 +15,10 @@ login_manager.login_message_category = "info"
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
+
+    # On Vercel, only /tmp is writable; point SQLite there when no DATABASE_URL is set.
+    if not os.environ.get("DATABASE_URL") and os.environ.get("VERCEL"):
+        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////tmp/egate.db"
 
     db.init_app(app)
     login_manager.init_app(app)
