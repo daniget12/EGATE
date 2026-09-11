@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard &mdash; EGATE Talent Center{% endblock %}
+
+{% block content %}
+<section class="dashboard">
+    <h1>Welcome, {{ current_user.username }}!</h1>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-label">Points</span>
+            <span class="stat-value">{{ current_user.points }}</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Challenges Available</span>
+            <span class="stat-value">{{ challenge_count | default(0) }}</span>
+        </div>
+    </div>
+    <p class="dashboard-note">Challenge engine and leaderboard coming in the next phase.</p>
+</section>
+{% endblock %}

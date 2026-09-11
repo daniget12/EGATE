@@ -1,0 +1,21 @@
+from flask import Blueprint, render_template
+from flask_login import current_user, login_required
+
+from app.models import Challenge
+
+main_bp = Blueprint("main", __name__)
+
+
+@main_bp.route("/")
+def index():
+    if current_user.is_authenticated:
+        challenge_count = Challenge.query.count()
+        return render_template("dashboard.html", challenge_count=challenge_count)
+    return render_template("index.html")
+
+
+@main_bp.route("/dashboard")
+@login_required
+def dashboard():
+    challenge_count = Challenge.query.count()
+    return render_template("dashboard.html", challenge_count=challenge_count)
