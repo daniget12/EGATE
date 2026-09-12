@@ -5,9 +5,9 @@ def _normalize_database_url(url):
     if not url:
         return url
     if url.startswith("postgres://"):
-        url = "postgresql://" + url[len("postgres://") :]
-    if url.startswith("postgresql+psycopg2://"):
-        url = "postgresql://" + url[len("postgresql+psycopg2://") :]
+        url = "postgresql+pg8000://" + url[len("postgres://") :]
+    elif url.startswith("postgresql://"):
+        url = "postgresql+pg8000://" + url[len("postgresql://") :]
     return url
 
 
