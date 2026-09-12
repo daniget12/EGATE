@@ -50,3 +50,19 @@ class Challenge(db.Model):
 
     def __repr__(self):
         return f"<Challenge {self.title}>"
+
+
+class UserChallenge(db.Model):
+    __tablename__ = "user_challenges"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    challenge_id = db.Column(db.Integer, db.ForeignKey("challenges.id"), nullable=False)
+    solved_at = db.Column(db.DateTime, default=_utcnow, nullable=False)
+
+    __table_args__ = (
+        db.UniqueConstraint("user_id", "challenge_id", name="_user_challenge_uc"),
+    )
+
+    def __repr__(self):
+        return f"<UserChallenge user_id={self.user_id} challenge_id={self.challenge_id}>"

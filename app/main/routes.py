@@ -19,3 +19,9 @@ def index():
 def dashboard():
     challenge_count = Challenge.query.count()
     return render_template("dashboard.html", challenge_count=challenge_count)
+
+
+@main_bp.route("/robots.txt")
+def robots():
+    from flask import Response
+    return Response("User-agent: *\nDisallow: /egate{r0b0ts_txt_1s_pUbl1c}\n", mimetype="text/plain")
