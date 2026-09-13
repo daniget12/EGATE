@@ -10,7 +10,7 @@
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Fira+Code:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <!-- Animate.css -->
@@ -24,7 +24,12 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('main.index') }}">
-                <i class="fas fa-shield-alt"></i> EGATE
+                <span class="logo-badge">
+                    <img src="{{ url_for('static', filename='images/egate-logo.png') }}"
+                         alt="EGATE Talent Center Logo"
+                         class="navbar-logo">
+                </span>
+                <span class="brand-text">EGATE</span>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -35,22 +40,22 @@
                 <ul class="navbar-nav ms-auto">
                     {% if current_user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('main.dashboard') }}">
+                            <a class="nav-link {% if request.endpoint == 'main.dashboard' %}active{% endif %}" href="{{ url_for('main.dashboard') }}">
                                 <i class="fas fa-home"></i> Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('challenges.list_challenges') }}">
+                            <a class="nav-link {% if request.endpoint and request.endpoint.startswith('challenges.') %}active{% endif %}" href="{{ url_for('challenges.list_challenges') }}">
                                 <i class="fas fa-flag"></i> Challenges
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('main.leaderboard') }}">
+                            <a class="nav-link {% if request.endpoint == 'main.leaderboard' %}active{% endif %}" href="{{ url_for('main.leaderboard') }}">
                                 <i class="fas fa-trophy"></i> Leaderboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('main.learning_path') }}">
+                            <a class="nav-link {% if request.endpoint == 'main.learning_path' %}active{% endif %}" href="{{ url_for('main.learning_path') }}">
                                 <i class="fas fa-road"></i> Learning Path
                             </a>
                         </li>
@@ -66,22 +71,22 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('main.leaderboard') }}">
+                            <a class="nav-link {% if request.endpoint == 'main.leaderboard' %}active{% endif %}" href="{{ url_for('main.leaderboard') }}">
                                 <i class="fas fa-trophy"></i> Leaderboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('main.learning_path') }}">
+                            <a class="nav-link {% if request.endpoint == 'main.learning_path' %}active{% endif %}" href="{{ url_for('main.learning_path') }}">
                                 <i class="fas fa-road"></i> Learning Path
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.login') }}">
+                            <a class="nav-link {% if request.endpoint == 'auth.login' %}active{% endif %}" href="{{ url_for('auth.login') }}">
                                 <i class="fas fa-sign-in-alt"></i> Login
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary px-3 text-dark ms-2" href="{{ url_for('auth.register') }}">
+                            <a class="btn btn-primary nav-cta" href="{{ url_for('auth.register') }}">
                                 Register
                             </a>
                         </li>

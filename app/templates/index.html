@@ -5,9 +5,11 @@
 {% block content %}
 <section class="hero">
     <div class="hero-content">
-        <img src="{{ url_for('static', filename='images/egate-logo.png') }}"
-             alt="EGATE Talent Center"
-             class="hero-logo">
+        <div class="hero-logo-wrap">
+            <img src="{{ url_for('static', filename='images/egate-logo.png') }}"
+                 alt="EGATE Talent Center Logo"
+                 class="hero-logo">
+        </div>
         <h1>Cybersecurity Learning Platform</h1>
         <p class="hero-text">
             Practice cybersecurity skills through original CTF challenges,

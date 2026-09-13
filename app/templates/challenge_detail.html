@@ -7,29 +7,29 @@
     <div class="challenge-header">
         <h1>{{ challenge.title }}</h1>
         <p>
-            <span class="badge badge-info">{{ challenge.category }}</span> | 
-            <span class="badge badge-warning">Difficulty: {{ challenge.difficulty }}</span> | 
-            <span class="badge badge-primary">{{ challenge.points }} pts</span>
+            <span class="badge badge-info badge-category">{{ challenge.category }}</span>
+            <span class="badge badge-warning badge-difficulty">{{ challenge.difficulty }}</span>
+            <span class="badge badge-primary badge-points">{{ challenge.points }} pts</span>
         </p>
     </div>
 
-    <div class="challenge-body card" style="margin-top: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+    <div class="challenge-body card">
         <h3>Description</h3>
         <p>{{ challenge.description | safe }}</p>
 
-        <hr style="margin: 20px 0;">
+        <hr>
 
         {% if is_solved %}
-            <div class="alert alert-success" style="color: green; font-weight: bold;">
+            <div class="alert alert-success">
                 <strong>Solved!</strong> You have already solved this challenge.
             </div>
         {% else %}
             <h3>Submit Flag</h3>
             <form method="POST" action="{{ url_for('challenges.submit', id=challenge.id) }}" class="flag-form">
-                <div class="form-group" style="margin-bottom: 15px;">
-                    <input type="text" name="flag" class="form-control" placeholder="egate{...}" required style="width: 100%; padding: 10px; font-family: monospace;">
+                <div class="form-group">
+                    <input type="text" name="flag" class="form-control flag-input" placeholder="egate{...}" required autocomplete="off">
                 </div>
-                <button type="submit" class="btn btn-primary" style="padding: 10px 20px;">Submit Flag</button>
+                <button type="submit" class="btn btn-flag">Submit Flag</button>
             </form>
         {% endif %}
     </div>
