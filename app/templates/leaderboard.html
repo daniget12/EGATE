@@ -1,33 +1,72 @@
 {% extends "base.html" %}
 
-{% block title %}Leaderboard &mdash; EGATE Talent Center{% endblock %}
+{% block title %}Leaderboard - EGATE Talent Center{% endblock %}
 
 {% block content %}
-<section class="leaderboard">
-    <h1>Leaderboard</h1>
-    <p class="dashboard-note">Top 10 learners by points.</p>
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-4 text-primary" style="font-family: 'Orbitron', monospace;">
+                <i class="fas fa-trophy text-warning"></i> Global Leaderboard
+            </h1>
+            <p class="lead text-secondary">Top 10 learners by points.</p>
+        </div>
+    </div>
 
     {% if top_users %}
-    <table class="leaderboard-table">
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Username</th>
-                <th>Points</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in top_users %}
-            <tr class="{% if current_user.is_authenticated and user.id == current_user.id %}highlight-row{% endif %}">
-                <td>{{ loop.index }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.points }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card p-4">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped table-hover align-middle mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col" class="text-center" style="width: 100px;">Rank</th>
+                                <th scope="col">Hacker</th>
+                                <th scope="col" class="text-end">Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in top_users %}
+                            <tr class="{% if current_user.is_authenticated and user.id == current_user.id %}table-info{% endif %}">
+                                <td class="text-center">
+                                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle fw-bold text-dark
+                                        {% if loop.index == 1 %}bg-warning
+                                        {% elif loop.index == 2 %}bg-light
+                                        {% elif loop.index == 3 %}bg-danger
+                                        {% else %}bg-secondary text-white{% endif %}" 
+                                        style="width: 35px; height: 35px; font-size: 0.9rem;">
+                                        {{ loop.index }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-user-ninja fs-4 me-3 text-secondary"></i>
+                                        <span class="fs-5 fw-medium">{{ user.username }}</span>
+                                        {% if current_user.is_authenticated and user.id == current_user.id %}
+                                            <span class="badge bg-primary ms-2">You</span>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="text-warning fw-bold fs-5">{{ user.points }}</span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     {% else %}
-    <p class="dashboard-note">No scores yet. Solve a challenge to appear here.</p>
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="alert alert-info bg-transparent border-info text-info">
+                <i class="fas fa-info-circle"></i> No scores yet. Solve a challenge to appear here.
+            </div>
+        </div>
+    </div>
     {% endif %}
-</section>
+</div>
 {% endblock %}

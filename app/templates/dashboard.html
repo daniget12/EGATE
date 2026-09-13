@@ -1,20 +1,62 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard &mdash; EGATE Talent Center{% endblock %}
+{% block title %}Dashboard - EGATE Talent Center{% endblock %}
 
 {% block content %}
-<section class="dashboard">
-    <h1>Welcome, {{ current_user.username }}!</h1>
-    <div class="stats-grid">
-        <div class="stat-card">
-            <span class="stat-label">Points</span>
-            <span class="stat-value">{{ current_user.points }}</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-label">Challenges Available</span>
-            <span class="stat-value">{{ challenge_count | default(0) }}</span>
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1 class="display-5 text-primary" style="font-family: 'Orbitron', monospace;">
+                Welcome, <span class="text-white">{{ current_user.username }}</span>!
+            </h1>
         </div>
     </div>
-    <p class="dashboard-note">Challenge engine and leaderboard coming in the next phase.</p>
-</section>
+    
+    <div class="row justify-content-center">
+        <!-- User Profile Snapshot -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center" style="background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(20, 20, 20, 0.9)); border: 1px solid var(--primary-color);">
+                <div class="card-body py-5">
+                    <div class="mb-4">
+                        <i class="fas fa-user-circle fa-5x text-secondary"></i>
+                    </div>
+                    <h3 class="card-title text-white mb-1" style="font-family: 'Orbitron', monospace;">{{ current_user.username }}</h3>
+                    <p class="text-secondary"><i class="fas fa-shield-alt text-primary"></i> EGATE Agent</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="col-md-8">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card stats-card h-100" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.3);">
+                        <div class="card-body">
+                            <i class="fas fa-star fa-2x text-warning mb-3"></i>
+                            <h2 class="stats-number text-warning m-0">{{ current_user.points }}</h2>
+                            <p class="text-uppercase text-secondary mt-2 fw-bold" style="letter-spacing: 1px;">Total Points</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card stats-card h-100" style="background: rgba(0, 128, 255, 0.05); border: 1px solid rgba(0, 128, 255, 0.3);">
+                        <div class="card-body">
+                            <i class="fas fa-flag fa-2x text-info mb-3"></i>
+                            <h2 class="stats-number text-info m-0">{{ challenge_count | default(0) }}</h2>
+                            <p class="text-uppercase text-secondary mt-2 fw-bold" style="letter-spacing: 1px;">Challenges Available</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="alert alert-info bg-transparent border-info text-info">
+                        <i class="fas fa-tools"></i> Challenge engine and leaderboard coming in the next phase.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
