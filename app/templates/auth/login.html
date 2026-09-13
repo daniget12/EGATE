@@ -3,40 +3,76 @@
 {% block title %}Login &mdash; EGATE Talent Center{% endblock %}
 
 {% block content %}
-<div class="auth-page">
-    <div class="auth-card">
-        <div class="auth-logo">
-            <img src="{{ url_for('static', filename='images/egate-logo.png') }}"
-                 alt="EGATE Talent Center Logo"
-                 class="auth-logo-img">
+<div class="sliding-auth-page">
+    <div class="sliding-container" id="container">
+        <!-- Sign Up Container -->
+        <div class="sliding-form-container sliding-sign-up-container">
+            <form method="POST" action="{{ url_for('auth.register') }}">
+                <h1>Create Account</h1>
+                <div class="auth-fields">
+                    <input type="text" name="username" placeholder="Username" required value="{{ username or '' }}" minlength="3">
+                    <input type="email" name="email" placeholder="Email" required value="{{ email or '' }}">
+                    <input type="password" name="password" placeholder="Password" required minlength="8">
+                    <div class="sliding-form-hint">At least 8 characters</div>
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
         </div>
-        <h1>Sign In</h1>
-        <p class="auth-subtitle">Access your cybersecurity learning dashboard</p>
 
-        <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required
-                       value="{{ username or '' }}"
-                       autocomplete="username" autofocus>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required
-                       autocomplete="current-password">
-            </div>
-            <div class="form-group form-check">
-                <label>
+        <!-- Sign In Container -->
+        <div class="sliding-form-container sliding-sign-in-container">
+            <form method="POST" action="{{ url_for('auth.login') }}">
+                <h1>Sign In</h1>
+                <div class="auth-fields">
+                    <input type="text" name="username" placeholder="Username" required value="{{ username or '' }}" autofocus>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <label style="font-size: 13px; color: var(--text-muted); align-self: flex-start; margin-left: 5px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
                     <input type="checkbox" name="remember"> Remember me
                 </label>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-        </form>
+                <button type="submit" style="margin-top: 15px;">Sign In</button>
+            </form>
+        </div>
 
-        <p class="auth-footer">
-            Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a>
-        </p>
+        <!-- Overlay Container -->
+        <div class="sliding-overlay-container">
+            <div class="sliding-overlay">
+                <div class="sliding-overlay-panel sliding-overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button type="button" class="ghost" id="signInBtn">Sign In</button>
+                </div>
+                <div class="sliding-overlay-panel sliding-overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button type="button" class="ghost" id="signUpBtn">Sign Up</button>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- egate{h7ml_c0mm3n7s_r_fun} -->
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const signUpButton = document.getElementById('signUpBtn');
+        const signInButton = document.getElementById('signInBtn');
+        const container = document.getElementById('container');
+
+        if(signUpButton && signInButton && container) {
+            signUpButton.addEventListener('click', () => {
+                container.classList.add("right-panel-active");
+                // Update URL via history API for better UX without reload
+                history.pushState(null, '', "{{ url_for('auth.register') }}");
+            });
+
+            signInButton.addEventListener('click', () => {
+                container.classList.remove("right-panel-active");
+                // Update URL via history API for better UX without reload
+                history.pushState(null, '', "{{ url_for('auth.login') }}");
+            });
+        }
+    });
+</script>
 {% endblock %}
