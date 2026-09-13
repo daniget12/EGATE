@@ -40,6 +40,7 @@ class Challenge(db.Model):
     flag_hash = db.Column(db.String(256), nullable=False)
     points = db.Column(db.Integer, default=100, nullable=False)
     difficulty = db.Column(db.String(20), default="easy", nullable=False)
+    hint = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=_utcnow, nullable=False)
 
     def set_flag(self, flag):

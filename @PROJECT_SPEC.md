@@ -39,6 +39,11 @@ These are documented as future work rather than left unaddressed. They are achie
 | Backend    | Python (Flask)                   | Existing familiarity; fast to set up           |
 | Database   | SQLite                           | No server setup required; sufficient for scale |
 
+## Assets
+- **EGATE Logo:** `static/images/egate-logo.png`
+  - Used in the navigation bar, login/registration pages, and dashboard header.
+  - Should be responsive and have appropriate alt text: "EGATE Talent Center Logo".
+
 ## Development Timeline (Guideline)
 
 ### Week 1: Core Platform

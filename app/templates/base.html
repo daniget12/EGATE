@@ -19,9 +19,13 @@
                 {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('main.dashboard') }}">Dashboard</a></li>
                     <li><a href="{{ url_for('challenges.list_challenges') }}">Challenges</a></li>
+                    <li><a href="{{ url_for('main.leaderboard') }}">Leaderboard</a></li>
+                    <li><a href="{{ url_for('main.learning_path') }}">Learning Path</a></li>
                     <li><span class="nav-user">{{ current_user.username }}</span></li>
                     <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 {% else %}
+                    <li><a href="{{ url_for('main.leaderboard') }}">Leaderboard</a></li>
+                    <li><a href="{{ url_for('main.learning_path') }}">Learning Path</a></li>
                     <li><a href="{{ url_for('auth.login') }}">Login</a></li>
                     <li><a href="{{ url_for('auth.register') }}" class="btn btn-nav">Register</a></li>
                 {% endif %}

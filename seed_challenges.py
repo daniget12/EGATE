@@ -2,18 +2,19 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import os
+from sqlalchemy import inspect, text
 from app import create_app, db
 from app.models import Challenge
 
 def seed():
     app = create_app()
     with app.app_context():
-        # Check if we already have challenges
-        if Challenge.query.first():
-            print("Challenges already seeded.")
-            return
-
-        print("Seeding challenges...")
+        inspector = inspect(db.engine)
+        challenge_columns = {col["name"] for col in inspector.get_columns("challenges")}
+        if "hint" not in challenge_columns:
+            db.session.execute(text("ALTER TABLE challenges ADD COLUMN hint TEXT"))
+            db.session.commit()
+            print("Added hint column to challenges table.")
 
         challenges_data = [
             {
@@ -22,7 +23,8 @@ def seed():
                 "category": "Web",
                 "difficulty": "easy",
                 "points": 50,
-                "flag": "egate{h7ml_c0mm3n7s_r_fun}"
+                "flag": "egate{h7ml_c0mm3n7s_r_fun}",
+                "hint": "Right-click the page and choose 'View Page Source'. Look for HTML comments — they start with <!-- and end with -->."
             },
             {
                 "title": "Robots taking over",
@@ -30,7 +32,8 @@ def seed():
                 "category": "Web",
                 "difficulty": "easy",
                 "points": 50,
-                "flag": "egate{r0b0ts_txt_1s_pUbl1c}"
+                "flag": "egate{r0b0ts_txt_1s_pUbl1c}",
+                "hint": "Search engines check a specific file at the root of every website to know what not to crawl. Its name starts with 'robots'."
             },
             {
                 "title": "Caesar's Secret",
@@ -38,7 +41,8 @@ def seed():
                 "category": "Crypto",
                 "difficulty": "easy",
                 "points": 50,
-                "flag": "egate{caesar_cipher_is_weak}"
+                "flag": "egate{caesar_cipher_is_weak}",
+                "hint": "The shift is 3. Shift every letter back by 3 (A → X, B → Y, etc.). An online ROT decoder can help."
             },
             {
                 "title": "Base64 Basic",
@@ -46,7 +50,8 @@ def seed():
                 "category": "Crypto",
                 "difficulty": "easy",
                 "points": 50,
-                "flag": "egate{base64_1s_easy}"
+                "flag": "egate{base64_1s_easy}",
+                "hint": "Base64 strings often end with '=' or '=='. Use an online Base64 decoder or Python's base64.b64decode()."
             },
             {
                 "title": "ROT13 Riddle",
@@ -54,7 +59,8 @@ def seed():
                 "category": "Crypto",
                 "difficulty": "easy",
                 "points": 50,
-                "flag": "egate{rot13_is_not_crypto}"
+                "flag": "egate{rot13_is_not_crypto}",
+                "hint": "ROT13 is a Caesar cipher with a shift of 13. It's its own inverse — apply it twice to get back to the original."
             },
             {
                 "title": "Identify the File",
@@ -62,7 +68,8 @@ def seed():
                 "category": "Forensics",
                 "difficulty": "easy",
                 "points": 75,
-                "flag": "egate{png}"
+                "flag": "egate{png}",
+                "hint": "The first few bytes of a file are called its 'magic bytes'. Search for 'PNG file signature' to identify this one."
             },
             {
                 "title": "The Odd One Out",
@@ -70,7 +77,8 @@ def seed():
                 "category": "Misc",
                 "difficulty": "easy",
                 "points": 25,
-                "flag": "egate{n0t_4_fru1t}"
+                "flag": "egate{n0t_4_fru1t}",
+                "hint": "One of these strings doesn't look like a normal word. Look for the one that starts with the same prefix as your platform flags."
             },
             {
                 "title": "URL Decode",
@@ -78,7 +86,8 @@ def seed():
                 "category": "Misc",
                 "difficulty": "easy",
                 "points": 50,
-                "flag": "egate{url_encod1ng}"
+                "flag": "egate{url_encod1ng}",
+                "hint": "Each %XX is a URL-encoded character. Paste the string into a URL decoder or use urllib.parse.unquote() in Python."
             },
             {
                 "title": "Hash Cracking 101",
@@ -86,9 +95,23 @@ def seed():
                 "category": "Crypto",
                 "difficulty": "medium",
                 "points": 100,
-                "flag": "egate{hello}"
+                "flag": "egate{hello}",
+                "hint": "This is an MD5 hash. Try an online MD5 lookup or crackstation.net."
             }
         ]
+
+        # Check if we already have challenges
+        if Challenge.query.first():
+            print("Challenges already seeded. Updating hints...")
+            for c_data in challenges_data:
+                existing = Challenge.query.filter_by(title=c_data["title"]).first()
+                if existing:
+                    existing.hint = c_data["hint"]
+            db.session.commit()
+            print("Hints updated.")
+            return
+
+        print("Seeding challenges...")
 
         count = 0
         for c_data in challenges_data:
@@ -97,7 +120,8 @@ def seed():
                 description=c_data["description"],
                 category=c_data["category"],
                 difficulty=c_data["difficulty"],
-                points=c_data["points"]
+                points=c_data["points"],
+                hint=c_data["hint"]
             )
             # set_flag handles the werkzeug.security.generate_password_hash part
             challenge.set_flag(c_data["flag"])

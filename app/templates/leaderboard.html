@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Leaderboard &mdash; EGATE Talent Center{% endblock %}
+
+{% block content %}
+<section class="leaderboard">
+    <h1>Leaderboard</h1>
+    <p class="dashboard-note">Top 10 learners by points.</p>
+
+    {% if top_users %}
+    <table class="leaderboard-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in top_users %}
+            <tr class="{% if current_user.is_authenticated and user.id == current_user.id %}highlight-row{% endif %}">
+                <td>{{ loop.index }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.points }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="dashboard-note">No scores yet. Solve a challenge to appear here.</p>
+    {% endif %}
+</section>
+{% endblock %}

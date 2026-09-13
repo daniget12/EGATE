@@ -49,3 +49,13 @@ def submit(id):
         flash("Incorrect flag. Try again.", "danger")
         
     return redirect(url_for("challenges.detail", id=challenge.id))
+
+@challenges_bp.route("/<int:id>/hint")
+@login_required
+def hint(id):
+    challenge = db.session.get(Challenge, id)
+    if not challenge:
+        return {"error": "Challenge not found"}, 404
+    if not challenge.hint:
+        return {"hint": "No hint available for this challenge yet."}
+    return {"hint": challenge.hint}

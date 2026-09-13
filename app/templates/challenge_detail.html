@@ -34,9 +34,31 @@
         {% endif %}
     </div>
 
-    <!-- AI Hints Placeholder -->
-    <div class="ai-hints-section mt-4" style="margin-top: 30px;">
-        <!-- AI hints placeholder -->
+    <div class="hint-section">
+        <h3>Need a hint?</h3>
+        <p class="dashboard-note">A nudge toward the solution — not the flag itself.</p>
+        <button type="button" id="hint-button" class="hint-button">Show Hint</button>
+        <div id="hint-text" class="hint-text hidden"></div>
     </div>
 </div>
+<script>
+    (function () {
+        const button = document.getElementById("hint-button");
+        const hintBox = document.getElementById("hint-text");
+        const hintUrl = {{ url_for('challenges.hint', id=challenge.id) | tojson }};
+
+        button.addEventListener("click", function () {
+            fetch(hintUrl)
+                .then(function (response) { return response.json(); })
+                .then(function (data) {
+                    hintBox.textContent = data.hint || data.error || "No hint available for this challenge yet.";
+                    hintBox.classList.remove("hidden");
+                })
+                .catch(function () {
+                    hintBox.textContent = "Could not load the hint. Please try again.";
+                    hintBox.classList.remove("hidden");
+                });
+        });
+    })();
+</script>
 {% endblock %}
