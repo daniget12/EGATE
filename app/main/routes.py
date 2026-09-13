@@ -28,12 +28,6 @@ def leaderboard():
     return render_template("leaderboard.html", top_users=top_users)
 
 
-@main_bp.route("/learning_path")
-@login_required
-def learning_path():
-    return render_template("learning_path.html")
-
-
 @main_bp.route("/robots.txt")
 def robots():
     from flask import Response

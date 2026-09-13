@@ -32,10 +32,12 @@ def create_app(config_class=Config):
     from app.auth.routes import auth_bp
     from app.main.routes import main_bp
     from app.challenges.routes import challenges_bp
+    from app.courses.routes import courses_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
     app.register_blueprint(challenges_bp)
+    app.register_blueprint(courses_bp)
 
     with app.app_context():
         db.create_all()
