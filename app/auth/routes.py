@@ -29,7 +29,11 @@ def register():
         if errors:
             for message in errors:
                 flash(message, "error")
-            return render_template("auth/register.html")
+            return render_template(
+                "auth/register.html",
+                username=username,
+                email=email,
+            )
 
         user = User(username=username, email=email)
         user.set_password(password)
@@ -40,7 +44,11 @@ def register():
         except IntegrityError:
             db.session.rollback()
             flash("Username or email is already registered.", "error")
-            return render_template("auth/register.html")
+            return render_template(
+                "auth/register.html",
+                username=username,
+                email=email,
+            )
 
         flash("Registration successful. Please log in.", "success")
         return redirect(url_for("auth.login"))
@@ -59,7 +67,7 @@ def login():
 
         if user is None or not user.check_password(password):
             flash("Invalid username or password.", "error")
-            return render_template("auth/login.html")
+            return render_template("auth/login.html", username=username)
 
         login_user(user, remember=remember)
         flash(f"Welcome back, {user.username}!", "success")

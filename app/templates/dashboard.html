@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row mb-5">
         <div class="col-12 text-center">
-            <h1 class="display-5 text-primary" style="font-family: 'Orbitron', monospace;">
+            <h1 class="display-5 text-primary">
                 Welcome, <span class="text-white">{{ current_user.username }}</span>!
             </h1>
         </div>
@@ -20,7 +20,7 @@
                     <div class="mb-4">
                         <i class="fas fa-user-circle fa-5x text-secondary"></i>
                     </div>
-                    <h3 class="card-title text-white mb-1" style="font-family: 'Orbitron', monospace;">{{ current_user.username }}</h3>
+                    <h3 class="card-title text-white mb-1">{{ current_user.username }}</h3>
                     <p class="text-secondary"><i class="fas fa-shield-alt text-primary"></i> EGATE Agent</p>
                 </div>
             </div>
@@ -45,14 +45,6 @@
                             <h2 class="stats-number text-info m-0">{{ challenge_count | default(0) }}</h2>
                             <p class="text-uppercase text-secondary mt-2 fw-bold" style="letter-spacing: 1px;">Challenges Available</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row mt-4">
-                <div class="col-12">
-                    <div class="alert alert-info bg-transparent border-info text-info">
-                        <i class="fas fa-tools"></i> Challenge engine and leaderboard coming in the next phase.
                     </div>
                 </div>
             </div>
