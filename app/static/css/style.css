@@ -1,4 +1,6 @@
 :root {
+    --color-bg: #0f172a;
+    --color-bg-translucent: rgba(15, 23, 42, 0.9);
     --neon-green: #22c55e;
     --neon-purple: #a855f7;
     --neon-cyan: #22d3ee;
@@ -17,7 +19,7 @@
 }
 
 [data-bs-theme="dark"] {
-    --bs-body-bg: #0a0a12;
+    --bs-body-bg: var(--color-bg);
     --bs-body-color: var(--text-primary);
     --bs-primary: var(--neon-purple);
     --bs-success: var(--neon-green);
@@ -36,12 +38,21 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    min-height: 100%;
+}
+
 body {
     font-family: var(--font-body);
-    background: linear-gradient(135deg, #05050a 0%, #0f172a 35%, #1a1030 70%, #0a1628 100%);
+    background-color: var(--color-bg);
+    background-image: linear-gradient(135deg, #0f172a 0%, #1a1030 55%, #0f172a 100%);
+    background-attachment: fixed;
     color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 #particles-js {
@@ -123,13 +134,40 @@ a:hover {
 }
 
 /* ---------- Navbar (terminal header) ---------- */
-.navbar {
-    background: rgba(8, 8, 18, 0.88) !important;
+.navbar,
+.navbar.navbar-light,
+.navbar.navbar-dark,
+.navbar.bg-light,
+.navbar.bg-white,
+.navbar.bg-dark,
+.navbar.bg-body,
+.navbar.bg-body-tertiary,
+.navbar.bg-body-secondary {
+    --bs-navbar-color: #e2e8f0;
+    --bs-navbar-hover-color: #22c55e;
+    --bs-navbar-active-color: #22c55e;
+    --bs-navbar-brand-color: #22c55e;
+    --bs-navbar-brand-hover-color: #22c55e;
+    --bs-navbar-toggler-border-color: rgba(168, 85, 247, 0.4);
+    background: var(--color-bg-translucent) !important;
+    background-color: var(--color-bg-translucent) !important;
+    background-image: none !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+    box-shadow: none;
     padding: 0.65rem 0;
     font-family: var(--font-mono);
+}
+
+.navbar .container,
+.navbar .container-fluid,
+.navbar .navbar-collapse,
+.navbar .navbar-nav,
+.navbar .nav-item,
+.navbar .nav-link {
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 .navbar-brand {
@@ -163,7 +201,7 @@ a:hover {
 }
 
 .nav-link {
-    color: var(--text-muted) !important;
+    color: #e2e8f0 !important;
     font-weight: 500;
     font-size: 0.82rem;
     letter-spacing: 0.08em;
@@ -798,19 +836,47 @@ input[name="flag"] {
 .text-warning { color: #fbbf24 !important; }
 .text-danger { color: var(--neon-red) !important; }
 
-.footer {
+.footer,
+.footer.bg-light,
+.footer.bg-white,
+.footer.bg-dark,
+.footer.bg-body,
+.footer.bg-body-tertiary {
     text-align: center;
     padding: 1.5rem;
-    color: var(--text-muted);
+    color: #94a3b8;
     font-size: 0.85rem;
     font-family: var(--font-mono);
-    border-top: 1px solid rgba(168, 85, 247, 0.3);
+    letter-spacing: 0.04em;
+    border-top: 1px solid rgba(168, 85, 247, 0.2);
     margin-top: auto;
-    background: rgba(8, 8, 18, 0.88);
+    background: var(--color-bg-translucent) !important;
+    background-color: var(--color-bg-translucent) !important;
+    background-image: none !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-.footer .text-secondary {
-    color: var(--text-muted) !important;
+.footer .container,
+.footer .container-fluid,
+.footer span,
+.footer p,
+.footer a {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.footer .text-secondary,
+.footer .text-muted {
+    color: #94a3b8 !important;
+}
+
+.footer a {
+    color: #e2e8f0;
+}
+
+.footer a:hover {
+    color: #22c55e;
 }
 
 hr {
