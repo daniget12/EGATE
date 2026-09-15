@@ -17,15 +17,83 @@ def seed():
             print("Added hint column to challenges table.")
 
         challenges_data = [
+            # GENERAL SKILLS
             {
-                "title": "JWT Tokens",
-                "description": "We intercepted a request header from an admin. Can you decode the payload?\n`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZmxhZyI6ImVnYXRle2p3dF90MGszbnNfYzRuX2IzX2QzYzBkM2R9In0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`",
-                "category": "Web",
+                "title": "Obedient Cat",
+                "description": "This file has a flag in plain sight (aka \"in-the-clear\"). `cat flag.txt`\nOutput: `egate{s4n1ty_v3r1f13d}`",
+                "category": "General Skills",
+                "difficulty": "easy",
+                "points": 50,
+                "flag": "egate{s4n1ty_v3r1f13d}",
+                "hint": "Any text editor can read a plain text file, or just look at the description."
+            },
+            {
+                "title": "Python Wrangling",
+                "description": "Python scripts are invoked kind of like programs in the Terminal... Can you run this python script using this password to get the flag? \n`python ende.py -d flag.txt.en`",
+                "category": "General Skills",
+                "difficulty": "easy",
+                "points": 50,
+                "flag": "egate{py7h0n_wran6l1ng_123}",
+                "hint": "You'll need to use the command line and python to decrypt."
+            },
+            {
+                "title": "Wave a flag",
+                "description": "Can you invoke help flags for a tool or binary? This program just prints out a flag if you pass it the `-h` or `--help` argument.",
+                "category": "General Skills",
+                "difficulty": "easy",
+                "points": 50,
+                "flag": "egate{b1ns_4nd_fl4gs}",
+                "hint": "Run the binary with the -h flag in a terminal."
+            },
+            {
+                "title": "Nice netcat...",
+                "description": "There is a nice program that you can talk to by using this command in a shell: `$ nc mercury.picoctf.net 12222`, but it doesn't speak English...",
+                "category": "General Skills",
                 "difficulty": "medium",
                 "points": 100,
-                "flag": "egate{jwt_t0k3ns_c4n_b3_d3c0d3d}",
-                "hint": "JWTs are just base64-encoded JSON strings separated by dots. Try decoding the middle part."
+                "flag": "egate{n3tc4t_1s_sw33t}",
+                "hint": "You can practice using netcat. The output might be ASCII numbers you need to convert to characters."
             },
+
+            # WEB EXPLOITATION
+            {
+                "title": "GET aHEAD",
+                "description": "Find the flag being held on this server to get ahead of the competition. Check the headers of the request.",
+                "category": "Web Exploitation",
+                "difficulty": "easy",
+                "points": 50,
+                "flag": "egate{r3j3ct_g3t_us3_h34d}",
+                "hint": "Maybe you have more than 2 choices (GET, POST). Check out other HTTP methods like HEAD."
+            },
+            {
+                "title": "Cookies",
+                "description": "Who doesn't love cookies? I heard the admin likes chocolate chip... check your browser's dev tools.",
+                "category": "Web Exploitation",
+                "difficulty": "easy",
+                "points": 50,
+                "flag": "egate{c00ki3s_4r3_d3l1c10us}",
+                "hint": "Check your browser's Application or Storage tab and try modifying the cookie value."
+            },
+            {
+                "title": "SQL Direct",
+                "description": "Connect to this PostgreSQL server and find the flag! \n`psql -h sql.server -U postgres -d public`",
+                "category": "Web Exploitation",
+                "difficulty": "medium",
+                "points": 100,
+                "flag": "egate{p5ql_1s_p0w3rful}",
+                "hint": "Use standard SQL queries like SELECT * FROM table_name to find the hidden data."
+            },
+            {
+                "title": "Local Authority",
+                "description": "Can you get the flag? Go to this website and see what you can discover. Look closely at the source code of the login page.",
+                "category": "Web Exploitation",
+                "difficulty": "medium",
+                "points": 100,
+                "flag": "egate{1nspeC7_3l3ment_1s_k3y}",
+                "hint": "Sometimes developers leave comments or javascript files containing passwords."
+            },
+
+            # CRYPTOGRAPHY
             {
                 "title": "Mod 26",
                 "description": "Cryptography can be easy, do you know what ROT13 is? \n`rtngr{arkg_gvzr_V_yy_gel_2_ebhaqf_bs_ebg13_MAQOIAXX}`",
@@ -36,31 +104,13 @@ def seed():
                 "hint": "ROT13 is a Caesar cipher with a shift of 13. An online ROT decoder can help."
             },
             {
-                "title": "Transformation",
-                "description": "I wonder what this really is...\n```python\n''.join([chr((ord(flag[i]) << 8) + ord(flag[i + 1])) for i in range(0, len(flag), 2)])\n```\nOutput: `敧慴敻ㄶ形楴獟ㅮ獴㌴摟て弸ⅽ`",
-                "category": "Reverse Engineering",
+                "title": "Mind your Ps and Qs",
+                "description": "In RSA, small e and n can be factored. \n`c: 2012...`\n`n: 2056...`\n`e: 65537`\nDecrypt this to get the flag.",
+                "category": "Cryptography",
                 "difficulty": "medium",
                 "points": 100,
-                "flag": "egate{16_bits_1nst34d_0f_8!}",
-                "hint": "Each output character is made by shifting one character by 8 bits and adding the next. Write a script to reverse this process by extracting the high byte and low byte of each character."
-            },
-            {
-                "title": "Git is public",
-                "description": "Developers often leave secrets in their commit history. We have a snippet of a git patch from a deleted commit on this project's repo:\n```diff\n- const ADMIN_FLAG = 'egate{n3v3r_c0mm1t_s3cr3ts_9a3b1}';\n+ const ADMIN_FLAG = process.env.ADMIN_FLAG;\n```\nCan you find the flag?",
-                "category": "Web",
-                "difficulty": "easy",
-                "points": 50,
-                "flag": "egate{n3v3r_c0mm1t_s3cr3ts_9a3b1}",
-                "hint": "Sometimes reading the provided diff is all you need."
-            },
-            {
-                "title": "Strings it!",
-                "description": "We intercepted a file being transferred over the network, but we only have its hex dump. Can you find the flag hidden inside?\n`50 4b 03 04 14 00 00 00 00 00 06 64 2f 5d 9f 8c e2 53 19 00 00 00 19 00 00 00 08 00 00 00 66 6c 61 67 2e 74 78 74 65 67 61 74 65 7b 6d 34 67 31 63 5f 62 79 74 33 73 5f 72 5f 63 30 30 6c 7d 50 4b ...`",
-                "category": "Forensics",
-                "difficulty": "medium",
-                "points": 100,
-                "flag": "egate{m4g1c_byt3s_r_c00l}",
-                "hint": "Look at the ASCII representation of the hex bytes. The `50 4b 03 04` signature indicates a ZIP file, but text files inside are often uncompressed!"
+                "flag": "egate{sm4ll_N_n0_g00d}",
+                "hint": "Use a tool like FactorDB to find the prime factors of N (p and q)."
             },
             {
                 "title": "Bases",
@@ -69,44 +119,127 @@ def seed():
                 "difficulty": "easy",
                 "points": 50,
                 "flag": "egate{th3s3_b4s3s_ar3_us3ful}",
-                "hint": "Base64 strings often end with '=' or '=='. Use an online Base64 decoder or Python's base64.b64decode()."
+                "hint": "Base64 strings often end with '=' or '=='. Use an online Base64 decoder."
             },
             {
-                "title": "RSA Beginner",
-                "description": "We intercepted a message encrypted with RSA. The public key is (n, e) and the ciphertext is c. \n`n = 3233`\n`e = 17`\n`c = 2790`\nCan you decrypt the message? Note: The flag is just the decrypted integer wrapped in egate{}.",
+                "title": "Vigenere",
+                "description": "Can you decrypt this message? \n`rgpkh{q41i3_c1p43r_i0q3p}`\nKey: `CYLAB`",
                 "category": "Cryptography",
+                "difficulty": "medium",
+                "points": 100,
+                "flag": "egate{v1g3_c1p43r_w0rks}",
+                "hint": "The Vigenère cipher uses a keyword to shift letters differently based on their position."
+            },
+
+            # REVERSE ENGINEERING
+            {
+                "title": "Transformation",
+                "description": "I wonder what this really is...\n```python\n''.join([chr((ord(flag[i]) << 8) + ord(flag[i + 1])) for i in range(0, len(flag), 2)])\n```\nOutput: `敧慴敻ㄶ形楴獟ㅮ獴㌴摟て弸ⅽ`",
+                "category": "Reverse Engineering",
+                "difficulty": "medium",
+                "points": 100,
+                "flag": "egate{16_bits_1nst34d_0f_8!}",
+                "hint": "Each output character is made by shifting one character by 8 bits and adding the next. Write a script to reverse this."
+            },
+            {
+                "title": "crackme-py",
+                "description": "We found this Python script `crackme.py` but it's obfuscated. Can you find the secret string?",
+                "category": "Reverse Engineering",
+                "difficulty": "easy",
+                "points": 50,
+                "flag": "egate{py7h0n_r3v3rs1ng_1s_fun}",
+                "hint": "Look for a variable that contains a strange string and try to print it out after decoding."
+            },
+            {
+                "title": "ARMssembly 0",
+                "description": "What integer does this program print with arguments 4134207980 and 950176538? File: `chall.S`",
+                "category": "Reverse Engineering",
                 "difficulty": "hard",
-                "points": 150,
-                "flag": "egate{65}",
-                "hint": "For small RSA, you can factor 'n' to find 'p' and 'q'. 3233 is a product of two small primes."
+                "points": 200,
+                "flag": "egate{E5A91D0C}",
+                "hint": "You don't need to execute it, just read the assembly. It looks like it's just comparing two numbers and printing the larger one in hex."
             },
+
+            # FORENSICS
             {
-                "title": "Robots taking over",
-                "description": "Search engines respect a file that tells them where not to look. Check /robots.txt on this site.",
-                "category": "Web",
+                "title": "Information",
+                "description": "Files can always be changed in a secret way. Can you find the flag hidden inside this image's metadata?",
+                "category": "Forensics",
                 "difficulty": "easy",
                 "points": 50,
-                "flag": "egate{r0b0ts_txt_1s_pUbl1c}",
-                "hint": "Search engines check a specific file at the root of every website to know what not to crawl. Navigate to /robots.txt."
+                "flag": "egate{m3t4d4t4_1s_h1dd3n}",
+                "hint": "Look at the details of the image using a tool like exiftool."
             },
             {
-                "title": "URL Decode",
-                "description": "Decode this string to get the flag: `%65%67%61%74%65%7B%75%72%6C%5F%65%6E%63%6F%64%31%6E%67%7D`",
-                "category": "Misc",
+                "title": "Glory of the Garden",
+                "description": "This garden contains more than it seems. Look deeply into the hex data of the image.",
+                "category": "Forensics",
                 "difficulty": "easy",
                 "points": 50,
-                "flag": "egate{url_encod1ng}",
-                "hint": "Each %XX is a URL-encoded character. Paste the string into a URL decoder."
+                "flag": "egate{m0r3_th4n_m33ts_th3_3y3}",
+                "hint": "A hex editor or the `strings` command can find text hidden inside non-text files."
+            },
+            {
+                "title": "Wireshark doo dooo do doo",
+                "description": "Can you find the flag? We captured some network traffic in a PCAP file.",
+                "category": "Forensics",
+                "difficulty": "medium",
+                "points": 100,
+                "flag": "egate{w1r3sh4rk_p4ck3ts_sn1ff3d}",
+                "hint": "Follow the TCP streams in Wireshark. The flag might be sent in plain text."
+            },
+            {
+                "title": "MacroHard StrongEdge",
+                "description": "I've hidden a flag in this document. Can you find it? It's a `.pptm` file.",
+                "category": "Forensics",
+                "difficulty": "medium",
+                "points": 100,
+                "flag": "egate{m4cr0s_4r3_v3ry_d4ng3r0us}",
+                "hint": "Office documents are just ZIP files. Unzip it and look for a hidden text file or macro."
+            },
+
+            # BINARY EXPLOITATION
+            {
+                "title": "Stonks",
+                "description": "I decided to write a stonk market program in C. It uses `printf(user_buf);`. Is that safe?",
+                "category": "Binary Exploitation",
+                "difficulty": "medium",
+                "points": 100,
+                "flag": "egate{f0rm4t_str1ng_vuln3r4b1l1ty}",
+                "hint": "This is a format string vulnerability. Pass `%x` repeatedly to leak memory from the stack."
+            },
+            {
+                "title": "buffer overflow 0",
+                "description": "Smash the stack. Let's start off simple, can you overflow the correct buffer in this program to get the flag?",
+                "category": "Binary Exploitation",
+                "difficulty": "easy",
+                "points": 50,
+                "flag": "egate{st4ck_sm4sh1ng_d3t3ct3d}",
+                "hint": "Input a string that is longer than the allocated buffer size (e.g., more than 16 characters) to trigger a segfault and print the flag."
+            },
+            {
+                "title": "RPS",
+                "description": "Here's a program that plays rock, paper, scissors against you. I hear something good happens if you win 5 times in a row.",
+                "category": "Binary Exploitation",
+                "difficulty": "hard",
+                "points": 200,
+                "flag": "egate{strstr_1s_n0t_3qu4ls}",
+                "hint": "Check the source code carefully. Does it use `strstr` to check your input? What if your input contains all three choices?"
             }
         ]
 
-        # Since we changed challenges completely, let's clear existing ones to cleanly replace them.
-        from sqlalchemy import text
+        # First we must delete UserChallenge references
+        from app.models import UserChallenge
+        db.session.query(UserChallenge).delete()
+        db.session.commit()
+        print("Cleared user progress.")
+
+        # Clear existing ones to cleanly replace them.
         db.session.query(Challenge).delete()
         db.session.commit()
         print("Cleared old challenges.")
 
-        print("Seeding new open-source style challenges...")
+        print("Seeding new picoCTF style challenges...")
 
         count = 0
         for c_data in challenges_data:
@@ -124,7 +257,7 @@ def seed():
             count += 1
             
         db.session.commit()
-        print(f"Successfully seeded {count} open source style challenges!")
+        print(f"Successfully seeded {count} picoCTF style challenges!")
 
 if __name__ == "__main__":
     seed()

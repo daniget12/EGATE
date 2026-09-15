@@ -13,38 +13,46 @@
         </div>
     </div>
     
-    <div class="row g-4 mt-2">
-        {% for challenge in challenges %}
-            <div class="col-md-6 col-lg-4">
-                <div class="card challenge-card h-100 {% if challenge.id in solved_ids %}solved{% endif %}">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="card-title mb-0 d-flex align-items-center gap-2" style="color: #f8fafc !important;">
-                                {{ challenge.title }}
-                                {% if challenge.id in solved_ids %}
-                                    <i class="fas fa-check-circle" style="color: #94a3b8; font-size: 0.9rem;"></i>
-                                {% endif %}
-                            </h4>
-                        </div>
-                        
-                        <div class="mb-4 d-flex flex-wrap gap-2">
-                            <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1;">{{ challenge.category }}</span>
-                            <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1;">{{ challenge.difficulty }}</span>
-                            <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1;">{{ challenge.points }} pts</span>
-                        </div>
-                        
-                        <div class="d-flex justify-content-end align-items-center mt-auto">
-                            <a href="{{ url_for('challenges.detail', id=challenge.id) }}" class="btn btn-sm" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
-                                {% if challenge.id in solved_ids %}
-                                    Review
-                                {% else %}
-                                    Start
-                                {% endif %}
-                            </a>
+    <div class="mt-4">
+        {% for category, items in challenges|groupby('category') %}
+        <div class="category-header">
+            <h2>
+                <i class="fas fa-folder-open me-2"></i>{{ category }}
+            </h2>
+        </div>
+        <div class="row g-4">
+            {% for challenge in items %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card challenge-card h-100 {% if challenge.id in solved_ids %}solved{% endif %}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="card-title mb-0 d-flex align-items-center gap-2" style="color: #f8fafc !important;">
+                                    {{ challenge.title }}
+                                    {% if challenge.id in solved_ids %}
+                                        <i class="fas fa-check-circle" style="color: #94a3b8; font-size: 0.9rem;"></i>
+                                    {% endif %}
+                                </h4>
+                            </div>
+                            
+                            <div class="mb-4 d-flex flex-wrap gap-2">
+                                <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1;">{{ challenge.difficulty }}</span>
+                                <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1;">{{ challenge.points }} pts</span>
+                            </div>
+                            
+                            <div class="d-flex justify-content-end align-items-center mt-auto">
+                                <a href="{{ url_for('challenges.detail', id=challenge.id) }}" class="btn btn-sm" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+                                    {% if challenge.id in solved_ids %}
+                                        Review
+                                    {% else %}
+                                        Start
+                                    {% endif %}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
+        </div>
         {% else %}
             <div class="col-12 text-center">
                 <div class="alert bg-transparent" style="border: 1px solid rgba(255,255,255,0.1); color: #94a3b8;">
