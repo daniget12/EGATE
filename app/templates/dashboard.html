@@ -4,50 +4,81 @@
 
 {% block content %}
 <div class="container">
-    <div class="row mb-5">
-        <div class="col-12 text-center">
-            <h1 class="display-5" style="color: #f8fafc;">
-                Welcome, <span>{{ current_user.username }}</span>!
-            </h1>
+    <div class="row mb-4">
+        <div class="col-12">
+            <p class="dash-greeting">
+                <span class="prompt">~/egate $</span> welcome <span class="user">{{ current_user.username }}</span>
+            </p>
+            <h1 class="display-5">Dashboard</h1>
         </div>
     </div>
     
-    <div class="row justify-content-center">
-        <!-- User Profile Snapshot -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 text-center">
-                <div class="card-body py-5">
-                    <div class="mb-4">
-                        <i class="fas fa-user-circle fa-5x text-secondary"></i>
-                    </div>
-                    <h3 class="card-title text-white mb-1">{{ current_user.username }}</h3>
-                    <p class="text-secondary"><i class="fas fa-shield-alt" style="color: #94a3b8;"></i> EGATE Agent</p>
+    <!-- Stats Row -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card stats-card h-100">
+                <div class="card-body">
+                    <i class="fas fa-star fa-2x mb-3 text-warning"></i>
+                    <h2 class="stats-number m-0">{{ current_user.points }}</h2>
+                    <p class="text-secondary text-uppercase mt-2 fw-bold" style="letter-spacing: 2px; font-size: 0.75rem;">Total Points</p>
                 </div>
             </div>
         </div>
-        
-        <!-- Stats -->
-        <div class="col-md-8">
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card stats-card h-100">
-                        <div class="card-body">
-                            <i class="fas fa-star fa-2x mb-3" style="color: #94a3b8;"></i>
-                            <h2 class="stats-number m-0" style="color: #f8fafc !important;">{{ current_user.points }}</h2>
-                            <p class="text-uppercase mt-2 fw-bold" style="color: #64748b; letter-spacing: 1px;">Total Points</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card stats-card h-100">
-                        <div class="card-body">
-                            <i class="fas fa-flag fa-2x mb-3" style="color: #94a3b8;"></i>
-                            <h2 class="stats-number m-0" style="color: #f8fafc !important;">{{ challenge_count | default(0) }}</h2>
-                            <p class="text-uppercase mt-2 fw-bold" style="color: #64748b; letter-spacing: 1px;">Challenges Available</p>
-                        </div>
-                    </div>
+        <div class="col-md-4">
+            <div class="card stats-card h-100">
+                <div class="card-body">
+                    <i class="fas fa-flag fa-2x mb-3 text-info"></i>
+                    <h2 class="stats-number m-0">{{ solved_count | default(0) }}</h2>
+                    <p class="text-secondary text-uppercase mt-2 fw-bold" style="letter-spacing: 2px; font-size: 0.75rem;">Solved</p>
                 </div>
             </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stats-card h-100">
+                <div class="card-body">
+                    <i class="fas fa-layer-group fa-2x mb-3 text-cyan"></i>
+                    <h2 class="stats-number m-0">{{ challenge_count | default(0) }}</h2>
+                    <p class="text-secondary text-uppercase mt-2 fw-bold" style="letter-spacing: 2px; font-size: 0.75rem;">Available</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <h3 class="mb-3"><i class="fas fa-bolt me-2"></i>Quick Actions</h3>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <a href="{{ url_for('challenges.list_challenges') }}" class="card quick-action-card h-100">
+                <div class="action-icon">
+                    <i class="fas fa-flag"></i>
+                </div>
+                <div>
+                    <h5 class="mb-1">Challenges</h5>
+                    <p class="text-secondary mb-0" style="font-size: 0.8rem;">Solve CTF challenges and earn points</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="{{ url_for('courses.list_courses') }}" class="card quick-action-card h-100">
+                <div class="action-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div>
+                    <h5 class="mb-1">Courses</h5>
+                    <p class="text-secondary mb-0" style="font-size: 0.8rem;">Learn cybersecurity fundamentals</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="{{ url_for('main.leaderboard') }}" class="card quick-action-card h-100">
+                <div class="action-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div>
+                    <h5 class="mb-1">Leaderboard</h5>
+                    <p class="text-secondary mb-0" style="font-size: 0.8rem;">See where you stand globally</p>
+                </div>
+            </a>
         </div>
     </div>
 </div>

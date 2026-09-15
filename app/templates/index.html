@@ -10,14 +10,54 @@
                  alt="EGATE Talent Center Logo"
                  class="hero-logo">
         </div>
-        <h1>Cybersecurity Learning Platform</h1>
+        <h1 class="hero-title glitch-text">Cybersecurity Learning Platform</h1>
+        <p class="hero-tagline">Train. Hack. Compete.</p>
         <p class="hero-text">
             Practice cybersecurity skills through original CTF challenges,
-            track your progress, and grow with structured courses.
+            track your progress on the leaderboard, and grow with structured courses.
         </p>
         <div class="hero-actions">
             <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Get Started</a>
             <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">Sign In</a>
+        </div>
+
+        <div class="stats-strip">
+            <div class="stat-item">
+                <div class="stat-value">21+</div>
+                <div class="stat-label">Challenges</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">6</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">Live</div>
+                <div class="stat-label">Leaderboard</div>
+            </div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="card feature-card">
+                <div class="card-body">
+                    <i class="fas fa-flag feature-icon"></i>
+                    <h3>CTF Challenges</h3>
+                    <p>Hands-on challenges across Web, Crypto, Forensics, Reverse Engineering, and Binary Exploitation.</p>
+                </div>
+            </div>
+            <div class="card feature-card">
+                <div class="card-body">
+                    <i class="fas fa-graduation-cap feature-icon"></i>
+                    <h3>Learning Paths</h3>
+                    <p>Structured courses that take you from beginner to advanced in key cybersecurity domains.</p>
+                </div>
+            </div>
+            <div class="card feature-card">
+                <div class="card-body">
+                    <i class="fas fa-trophy feature-icon"></i>
+                    <h3>Global Leaderboard</h3>
+                    <p>Compete with other learners and climb the ranks as you solve more challenges.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
