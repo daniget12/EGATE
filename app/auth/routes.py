@@ -1,12 +1,17 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+import os
+from datetime import datetime, timedelta, timezone
+from flask import Blueprint, flash, redirect, render_template, request, url_for, current_app
 from flask_login import login_user, logout_user
 from sqlalchemy.exc import IntegrityError
+from itsdangerous import URLSafeTimedSerializer
 
 from app import db
 from app.models import User
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
+def get_serializer():
+    return URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
 
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
@@ -59,20 +64,44 @@ def register():
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form.get("username", "").strip()
+        login_id = request.form.get("username", "").strip()
         password = request.form.get("password", "")
         remember = request.form.get("remember") == "on"
 
-        user = User.query.filter_by(username=username).first()
+        if "@" in login_id:
+            user = User.query.filter_by(email=login_id.lower()).first()
+        else:
+            user = User.query.filter_by(username=login_id).first()
 
-        if user is None or not user.check_password(password):
-            flash("Invalid username or password.", "error")
-            return render_template("auth/login.html", username=username)
+        if user:
+            # Check brute-force protection
+            if user.locked_until and user.locked_until > datetime.now(timezone.utc):
+                flash(f"Account locked due to too many failed attempts. Try again after {user.locked_until.strftime('%H:%M:%S UTC')}.", "error")
+                return render_template("auth/login.html", username=login_id)
+            
+            if user.check_password(password):
+                # Login successful, reset attempts
+                user.failed_login_attempts = 0
+                user.locked_until = None
+                db.session.commit()
 
-        login_user(user, remember=remember)
-        flash(f"Welcome back, {user.username}!", "success")
-        next_page = request.args.get("next")
-        return redirect(next_page or url_for("main.dashboard"))
+                login_user(user, remember=remember)
+                flash(f"Welcome back, {user.username}!", "success")
+                next_page = request.args.get("next")
+                return redirect(next_page or url_for("main.dashboard"))
+            else:
+                # Password incorrect
+                user.failed_login_attempts += 1
+                if user.failed_login_attempts >= 5:
+                    user.locked_until = datetime.now(timezone.utc) + timedelta(minutes=15)
+                    flash("Account locked for 15 minutes due to too many failed attempts.", "error")
+                else:
+                    flash(f"Invalid username/email or password. ({5 - user.failed_login_attempts} attempts left)", "error")
+                db.session.commit()
+                return render_template("auth/login.html", username=login_id)
+        else:
+            flash("Invalid username/email or password.", "error")
+            return render_template("auth/login.html", username=login_id)
 
     return render_template("auth/login.html")
 
@@ -82,3 +111,222 @@ def logout():
     logout_user()
     flash("You have been logged out.", "info")
     return redirect(url_for("auth.login"))
+
+
+@auth_bp.route("/forgot_password", methods=["GET", "POST"])
+def forgot_password():
+    if request.method == "POST":
+        email = request.form.get("email", "").strip().lower()
+        user = User.query.filter_by(email=email).first()
+        if user:
+            s = get_serializer()
+            token = s.dumps(user.email, salt='reset-password')
+            reset_url = url_for('auth.reset_password', token=token, _external=True)
+            # Simulating email send by printing to console
+            print(f"\n\n--- PASSWORD RESET LINK ---\nSend this link to {user.email}:\n{reset_url}\n---------------------------\n\n")
+            flash("If an account exists for that email, a reset link has been printed to the server console.", "info")
+        else:
+            flash("If an account exists for that email, a reset link has been printed to the server console.", "info")
+        return redirect(url_for('auth.login'))
+    return render_template("auth/forgot_password.html")
+
+
+@auth_bp.route("/reset_password/<token>", methods=["GET", "POST"])
+def reset_password(token):
+    s = get_serializer()
+    try:
+        email = s.loads(token, salt='reset-password', max_age=3600) # 1 hour
+    except Exception:
+        flash("The reset link is invalid or has expired.", "error")
+        return redirect(url_for('auth.forgot_password'))
+
+    if request.method == "POST":
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
+        if len(password) < 8:
+            flash("Password must be at least 8 characters.", "error")
+        elif password != confirm_password:
+            flash("Passwords do not match.", "error")
+        else:
+            user = User.query.filter_by(email=email).first()
+            if user:
+                user.set_password(password)
+                user.failed_login_attempts = 0
+                user.locked_until = None
+                db.session.commit()
+                flash("Your password has been reset successfully. You can now log in.", "success")
+                return redirect(url_for("auth.login"))
+            else:
+                flash("User not found.", "error")
+                return redirect(url_for("auth.register"))
+    
+    return render_template("auth/reset_password.html", token=token)
+
+
+@auth_bp.route("/login/github")
+def github_login():
+    oauth = current_app.extensions.get('oauth')
+    if not oauth:
+        flash("OAuth is not configured.", "error")
+        return redirect(url_for('auth.login'))
+    
+    github = oauth.create_client('github')
+    if not github:
+        github = oauth.register(
+            name='github',
+            client_id=os.environ.get('GITHUB_CLIENT_ID'),
+            client_secret=os.environ.get('GITHUB_CLIENT_SECRET'),
+            access_token_url='https://github.com/login/oauth/access_token',
+            access_token_params=None,
+            authorize_url='https://github.com/login/oauth/authorize',
+            authorize_params=None,
+            api_base_url='https://api.github.com/',
+            client_kwargs={'scope': 'user:email'},
+        )
+    
+    redirect_uri = url_for('auth.github_authorize', _external=True)
+    return github.authorize_redirect(redirect_uri)
+
+
+@auth_bp.route("/login/github/authorize")
+def github_authorize():
+    oauth = current_app.extensions.get('oauth')
+    github = oauth.create_client('github')
+    
+    try:
+        token = github.authorize_access_token()
+    except Exception as e:
+        flash(f"GitHub login failed: {str(e)}", "error")
+        return redirect(url_for('auth.login'))
+        
+    resp = github.get('user', token=token)
+    profile = resp.json()
+    
+    github_id = str(profile.get('id'))
+    username = profile.get('login')
+    
+    # Try to get email (GitHub might not return it in main profile if private)
+    email = profile.get('email')
+    if not email:
+        # Fetch emails explicitly
+        email_resp = github.get('user/emails', token=token)
+        emails = email_resp.json()
+        primary_email = next((e['email'] for e in emails if e.get('primary') and e.get('verified')), None)
+        email = primary_email or (emails[0]['email'] if emails else None)
+
+    if not email:
+        flash("Could not retrieve email from GitHub.", "error")
+        return redirect(url_for('auth.login'))
+
+    user = User.query.filter_by(github_id=github_id).first()
+    
+    if not user:
+        # Check if email is already taken by a non-GitHub user
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            # Link accounts (optional) or deny
+            existing_user.github_id = github_id
+            user = existing_user
+            db.session.commit()
+            flash("Linked your GitHub account to your existing profile.", "success")
+        else:
+            # Create new user
+            base_username = username
+            counter = 1
+            while User.query.filter_by(username=username).first():
+                username = f"{base_username}{counter}"
+                counter += 1
+                
+            user = User(username=username, email=email, github_id=github_id)
+            db.session.add(user)
+            db.session.commit()
+            flash(f"Welcome to EGATE, {user.username}!", "success")
+    else:
+        # Account locked check
+        if user.locked_until and user.locked_until > datetime.now(timezone.utc):
+            flash(f"Account locked. Try again after {user.locked_until.strftime('%H:%M:%S UTC')}.", "error")
+            return redirect(url_for('auth.login'))
+        flash(f"Welcome back, {user.username}!", "success")
+
+    login_user(user)
+    next_page = request.args.get("next")
+    return redirect(next_page or url_for("main.dashboard"))
+
+
+@auth_bp.route("/login/discord")
+def discord_login():
+    oauth = current_app.extensions.get('oauth')
+    if not oauth:
+        flash("OAuth is not configured.", "error")
+        return redirect(url_for('auth.login'))
+    
+    discord = oauth.create_client('discord')
+    if not discord:
+        discord = oauth.register(
+            name='discord',
+            client_id=os.environ.get('DISCORD_CLIENT_ID'),
+            client_secret=os.environ.get('DISCORD_CLIENT_SECRET'),
+            access_token_url='https://discord.com/api/oauth2/token',
+            access_token_params=None,
+            authorize_url='https://discord.com/api/oauth2/authorize',
+            authorize_params=None,
+            api_base_url='https://discord.com/api/users/@me',
+            client_kwargs={'scope': 'identify email'},
+        )
+    
+    redirect_uri = url_for('auth.discord_authorize', _external=True)
+    return discord.authorize_redirect(redirect_uri)
+
+
+@auth_bp.route("/login/discord/authorize")
+def discord_authorize():
+    oauth = current_app.extensions.get('oauth')
+    discord = oauth.create_client('discord')
+    
+    try:
+        token = discord.authorize_access_token()
+    except Exception as e:
+        flash(f"Discord login failed: {str(e)}", "error")
+        return redirect(url_for('auth.login'))
+        
+    resp = discord.get('', token=token)
+    profile = resp.json()
+    
+    discord_id = str(profile.get('id'))
+    username = profile.get('username')
+    email = profile.get('email')
+
+    if not email:
+        flash("Could not retrieve email from Discord.", "error")
+        return redirect(url_for('auth.login'))
+
+    user = User.query.filter_by(discord_id=discord_id).first()
+    
+    if not user:
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            existing_user.discord_id = discord_id
+            user = existing_user
+            db.session.commit()
+            flash("Linked your Discord account to your existing profile.", "success")
+        else:
+            base_username = username
+            counter = 1
+            while User.query.filter_by(username=username).first():
+                username = f"{base_username}{counter}"
+                counter += 1
+                
+            user = User(username=username, email=email, discord_id=discord_id)
+            db.session.add(user)
+            db.session.commit()
+            flash(f"Welcome to EGATE, {user.username}!", "success")
+    else:
+        if user.locked_until and user.locked_until > datetime.now(timezone.utc):
+            flash(f"Account locked. Try again after {user.locked_until.strftime('%H:%M:%S UTC')}.", "error")
+            return redirect(url_for('auth.login'))
+        flash(f"Welcome back, {user.username}!", "success")
+
+    login_user(user)
+    next_page = request.args.get("next")
+    return redirect(next_page or url_for("main.dashboard"))
+

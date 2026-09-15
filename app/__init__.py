@@ -22,6 +22,10 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     login_manager.init_app(app)
+    
+    from authlib.integrations.flask_client import OAuth
+    oauth = OAuth(app)
+    app.extensions['oauth'] = oauth
 
     from app.models import User
 

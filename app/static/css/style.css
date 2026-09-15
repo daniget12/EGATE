@@ -1098,6 +1098,16 @@ hr {
 .sliding-container input:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(45, 160, 168, 0.4) !important;
+    background-color: #eee !important;
+    color: #333 !important;
+}
+
+.sliding-container input:-webkit-autofill,
+.sliding-container input:-webkit-autofill:hover, 
+.sliding-container input:-webkit-autofill:focus, 
+.sliding-container input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #eee inset !important;
+    -webkit-text-fill-color: #333 !important;
 }
 
 .sliding-container input[type="checkbox"] {
