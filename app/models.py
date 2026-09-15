@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False, index=True)
     password_hash = db.Column(db.String(256), nullable=True)
     github_id = db.Column(db.String(100), unique=True, nullable=True)
-    discord_id = db.Column(db.String(100), unique=True, nullable=True)
+    google_id = db.Column(db.String(100), unique=True, nullable=True)
     points = db.Column(db.Integer, default=0, nullable=False)
     created_at = db.Column(db.DateTime, default=_utcnow, nullable=False)
     failed_login_attempts = db.Column(db.Integer, default=0, nullable=False)

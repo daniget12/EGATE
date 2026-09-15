@@ -253,62 +253,66 @@ def github_authorize():
     return redirect(next_page or url_for("main.dashboard"))
 
 
-@auth_bp.route("/login/discord")
-def discord_login():
+@auth_bp.route("/login/google")
+def google_login():
     oauth = current_app.extensions.get('oauth')
     if not oauth:
         flash("OAuth is not configured.", "error")
         return redirect(url_for('auth.login'))
     
-    discord = oauth.create_client('discord')
-    if not discord:
-        discord = oauth.register(
-            name='discord',
-            client_id=os.environ.get('DISCORD_CLIENT_ID'),
-            client_secret=os.environ.get('DISCORD_CLIENT_SECRET'),
-            access_token_url='https://discord.com/api/oauth2/token',
+    google = oauth.create_client('google')
+    if not google:
+        google = oauth.register(
+            name='google',
+            client_id=os.environ.get('GOOGLE_CLIENT_ID'),
+            client_secret=os.environ.get('GOOGLE_CLIENT_SECRET'),
+            access_token_url='https://accounts.google.com/o/oauth2/token',
             access_token_params=None,
-            authorize_url='https://discord.com/api/oauth2/authorize',
+            authorize_url='https://accounts.google.com/o/oauth2/auth',
             authorize_params=None,
-            api_base_url='https://discord.com/api/users/@me',
-            client_kwargs={'scope': 'identify email'},
+            api_base_url='https://www.googleapis.com/oauth2/v1/',
+            client_kwargs={'scope': 'openid email profile'},
         )
     
-    redirect_uri = url_for('auth.discord_authorize', _external=True)
-    return discord.authorize_redirect(redirect_uri)
+    redirect_uri = url_for('auth.google_authorize', _external=True)
+    return google.authorize_redirect(redirect_uri)
 
 
-@auth_bp.route("/login/discord/authorize")
-def discord_authorize():
+@auth_bp.route("/login/google/authorize")
+def google_authorize():
     oauth = current_app.extensions.get('oauth')
-    discord = oauth.create_client('discord')
+    google = oauth.create_client('google')
     
     try:
-        token = discord.authorize_access_token()
+        token = google.authorize_access_token()
     except Exception as e:
-        flash(f"Discord login failed: {str(e)}", "error")
+        flash(f"Google login failed: {str(e)}", "error")
         return redirect(url_for('auth.login'))
         
-    resp = discord.get('', token=token)
+    resp = google.get('userinfo', token=token)
     profile = resp.json()
     
-    discord_id = str(profile.get('id'))
-    username = profile.get('username')
+    google_id = str(profile.get('id'))
     email = profile.get('email')
+    
+    # Create a username from email or name
+    username = profile.get('name') or profile.get('given_name') or email.split('@')[0]
+    # Keep alphanumeric for simplicity
+    username = "".join(c for c in username if c.isalnum())
 
     if not email:
-        flash("Could not retrieve email from Discord.", "error")
+        flash("Could not retrieve email from Google.", "error")
         return redirect(url_for('auth.login'))
 
-    user = User.query.filter_by(discord_id=discord_id).first()
+    user = User.query.filter_by(google_id=google_id).first()
     
     if not user:
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
-            existing_user.discord_id = discord_id
+            existing_user.google_id = google_id
             user = existing_user
             db.session.commit()
-            flash("Linked your Discord account to your existing profile.", "success")
+            flash("Linked your Google account to your existing profile.", "success")
         else:
             base_username = username
             counter = 1
@@ -316,7 +320,7 @@ def discord_authorize():
                 username = f"{base_username}{counter}"
                 counter += 1
                 
-            user = User(username=username, email=email, discord_id=discord_id)
+            user = User(username=username, email=email, google_id=google_id)
             db.session.add(user)
             db.session.commit()
             flash(f"Welcome to EGATE, {user.username}!", "success")
