@@ -20,7 +20,7 @@ def seed():
             # GENERAL SKILLS
             {
                 "title": "Obedient Cat",
-                "description": "This file has a flag in plain sight (aka \"in-the-clear\").\n\n[Download flag.txt](/static/challenges/flag.txt)",
+                "description": "This file has a flag in plain sight (aka \"in-the-clear\").\n\n<a href='/static/challenges/flag.txt' target='_blank'>📥 Download flag.txt</a>",
                 "category": "General Skills",
                 "difficulty": "easy",
                 "points": 50,
@@ -29,7 +29,7 @@ def seed():
             },
             {
                 "title": "Python Wrangling",
-                "description": "Python scripts are invoked kind of like programs in the Terminal... Can you run this python script using this password to get the flag? \n\n[Download ende.py](/static/challenges/ende.py)\n[Download flag.txt.en](/static/challenges/flag.txt.en)\n\nThe password is: `secr3t_k3y`",
+                "description": "Python scripts are invoked kind of like programs in the Terminal... Can you run this python script using this password to get the flag? \n\n<a href='/static/challenges/ende.py' target='_blank'>📥 Download ende.py</a><br><a href='/static/challenges/flag.txt.en' target='_blank'>📥 Download flag.txt.en</a>\n\nThe password is: <code>secr3t_k3y</code>",
                 "category": "General Skills",
                 "difficulty": "easy",
                 "points": 50,
@@ -38,7 +38,7 @@ def seed():
             },
             {
                 "title": "Wave a flag",
-                "description": "Can you invoke help flags for a tool or binary? This program just prints out a flag if you pass it the `-h` or `--help` argument.\n\n[Download wave.py](/static/challenges/wave.py)",
+                "description": "Can you invoke help flags for a tool or binary? This program just prints out a flag if you pass it the <code>-h</code> or <code>--help</code> argument.\n\n<a href='/static/challenges/wave.py' target='_blank'>📥 Download wave.py</a>",
                 "category": "General Skills",
                 "difficulty": "easy",
                 "points": 50,
@@ -47,7 +47,7 @@ def seed():
             },
             {
                 "title": "First Grep",
-                "description": "Can you find the flag in this huge file? It's hidden somewhere among thousands of lines.\n\n[Download file.txt](/static/challenges/file.txt)",
+                "description": "Can you find the flag in this huge file? It's hidden somewhere among thousands of lines.\n\n<a href='/static/challenges/file.txt' target='_blank'>📥 Download file.txt</a>",
                 "category": "General Skills",
                 "difficulty": "medium",
                 "points": 100,
@@ -58,7 +58,7 @@ def seed():
             # WEB EXPLOITATION
             {
                 "title": "GET aHEAD",
-                "description": "Find the flag being held on this server to get ahead of the competition. Check the headers of the request.\n\n[Visit Challenge Site](/web/get-ahead)",
+                "description": "Find the flag being held on this server to get ahead of the competition. Check the headers of the request.\n\n<a href='/web/get-ahead' target='_blank'>🌐 Open Challenge Site</a>",
                 "category": "Web Exploitation",
                 "difficulty": "easy",
                 "points": 50,
@@ -67,7 +67,7 @@ def seed():
             },
             {
                 "title": "Cookies",
-                "description": "Who doesn't love cookies? I heard the admin likes snickerdoodles... check your browser's dev tools.\n\n[Visit Challenge Site](/web/cookies)",
+                "description": "Who doesn't love cookies? I heard the admin likes snickerdoodles... check your browser's dev tools.\n\n<a href='/web/cookies' target='_blank'>🌐 Open Challenge Site</a>",
                 "category": "Web Exploitation",
                 "difficulty": "easy",
                 "points": 50,
@@ -76,7 +76,7 @@ def seed():
             },
             {
                 "title": "SQLi Lite",
-                "description": "Connect to this web authentication system and bypass the login to find the flag! \n\n[Visit Challenge Site](/web/sql-direct)",
+                "description": "Connect to this web authentication system and bypass the login to find the flag! \n\n<a href='/web/sql-direct' target='_blank'>🌐 Open Challenge Site</a>",
                 "category": "Web Exploitation",
                 "difficulty": "medium",
                 "points": 100,
@@ -85,7 +85,7 @@ def seed():
             },
             {
                 "title": "Local Authority",
-                "description": "Can you get the flag? Go to this website and see what you can discover. Look closely at the source code of the login page.\n\n[Visit Challenge Site](/web/local-auth)",
+                "description": "Can you get the flag? Go to this website and see what you can discover. Look closely at the source code of the login page.\n\n<a href='/web/local-auth' target='_blank'>🌐 Open Challenge Site</a>",
                 "category": "Web Exploitation",
                 "difficulty": "medium",
                 "points": 100,
@@ -143,7 +143,7 @@ def seed():
             },
             {
                 "title": "crackme-py",
-                "description": "We found this Python script `crackme.py` but it's obfuscated. Can you find the secret string?\n\n[Download crackme.py](/static/challenges/crackme.py)",
+                "description": "We found this Python script <code>crackme.py</code> but it's obfuscated. Can you find the secret string?\n\n<a href='/static/challenges/crackme.py' target='_blank'>📥 Download crackme.py</a>",
                 "category": "Reverse Engineering",
                 "difficulty": "easy",
                 "points": 50,
@@ -152,7 +152,7 @@ def seed():
             },
             {
                 "title": "ARMssembly 0",
-                "description": "What integer does this program print with arguments 4134207980 and 950176538? \n\n[Download chall.S](/static/challenges/chall.S)",
+                "description": "What integer does this program print with arguments 4134207980 and 950176538? \n\n<a href='/static/challenges/chall.S' target='_blank'>📥 Download chall.S</a>",
                 "category": "Reverse Engineering",
                 "difficulty": "hard",
                 "points": 200,
@@ -172,7 +172,7 @@ def seed():
             },
             {
                 "title": "MacroHard StrongEdge",
-                "description": "I've hidden a flag in this archive document. Can you find it?\n\n[Download hidden.zip](/static/challenges/hidden.zip)",
+                "description": "I've hidden a flag in this archive document. Can you find it?\n\n<a href='/static/challenges/hidden.zip' target='_blank'>📥 Download hidden.zip</a>",
                 "category": "Forensics",
                 "difficulty": "medium",
                 "points": 100,
@@ -181,7 +181,7 @@ def seed():
             },
             {
                 "title": "Robots taking over",
-                "description": "Search engines respect a file that tells them where not to look. Check the robots file on this site.\n\n[Visit Challenge Site](/web/robots.txt)",
+                "description": "Search engines respect a file that tells them where not to look. Check the robots file on this site.\n\n<a href='/web/robots.txt' target='_blank'>🌐 Open Challenge Site</a>",
                 "category": "Web Exploitation",
                 "difficulty": "easy",
                 "points": 50,
