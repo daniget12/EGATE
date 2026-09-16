@@ -4,79 +4,66 @@
 
 {% block content %}
 <div class="container">
-    <div class="row mb-4">
-        <div class="col-12 text-center">
-            <h1 class="display-4 glitch-text">
-                <i class="fas fa-terminal me-2"></i>Challenge Arena
-            </h1>
-            <p class="lead mt-3 text-secondary">Prove your skills across multiple cybersecurity domains</p>
-        </div>
+    <div class="mb-4">
+        <h1 class="display-4">Challenges</h1>
+        <p class="text-muted">Prove your skills across multiple cybersecurity domains</p>
     </div>
     
-    <div class="mt-4">
-        {% set category_icons = {
-            'General Skills': 'fa-terminal',
-            'Web Exploitation': 'fa-globe',
-            'Cryptography': 'fa-lock',
-            'Reverse Engineering': 'fa-microchip',
-            'Forensics': 'fa-search',
-            'Binary Exploitation': 'fa-bug'
-        } %}
+    {% set category_icons = {
+        'General Skills': 'fa-terminal',
+        'Web Exploitation': 'fa-globe',
+        'Cryptography': 'fa-lock',
+        'Reverse Engineering': 'fa-microchip',
+        'Forensics': 'fa-search',
+        'Binary Exploitation': 'fa-bug'
+    } %}
 
-        {% for category, items in challenges|groupby('category') %}
-        {% set solved_in_cat = items|selectattr('id', 'in', solved_ids)|list|length %}
-        <div class="category-header">
-            <h2>
-                <i class="fas {{ category_icons.get(category, 'fa-folder') }} me-2"></i>{{ category }}
-            </h2>
-            <span class="category-progress">{{ solved_in_cat }}/{{ items|length }} solved</span>
-        </div>
-        <div class="row g-4">
-            {% for challenge in items %}
-                <div class="col-md-6 col-lg-4">
-                    <div class="card challenge-card h-100 {% if challenge.id in solved_ids %}solved{% endif %}">
-                        <div class="card-body d-flex flex-column">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <h4 class="card-title mb-0">
-                                    {{ challenge.title }}
-                                </h4>
-                                {% if challenge.id in solved_ids %}
-                                    <i class="fas fa-check-circle text-info"></i>
-                                {% endif %}
-                            </div>
-                            
-                            <div class="mb-3 d-flex flex-wrap gap-2">
-                                {% if challenge.difficulty == 'easy' %}
-                                    <span class="badge badge-easy">{{ challenge.difficulty }}</span>
-                                {% elif challenge.difficulty == 'hard' %}
-                                    <span class="badge badge-hard">{{ challenge.difficulty }}</span>
-                                {% else %}
-                                    <span class="badge badge-medium">{{ challenge.difficulty }}</span>
-                                {% endif %}
-                                <span class="badge badge-points">{{ challenge.points }} pts</span>
-                            </div>
-                            
-                            <div class="mt-auto d-flex justify-content-end">
-                                <a href="{{ url_for('challenges.detail', id=challenge.id) }}" class="btn btn-sm btn-secondary">
-                                    {% if challenge.id in solved_ids %}
-                                        Review
-                                    {% else %}
-                                        Start <i class="fas fa-arrow-right ms-1"></i>
-                                    {% endif %}
-                                </a>
-                            </div>
-                        </div>
+    {% for category, items in challenges|groupby('category') %}
+    {% set solved_in_cat = items|selectattr('id', 'in', solved_ids)|list|length %}
+    <div class="category-header">
+        <h2><i class="fas {{ category_icons.get(category, 'fa-folder') }} me-2"></i>{{ category }}</h2>
+        <span class="category-progress">{{ solved_in_cat }}/{{ items|length }}</span>
+    </div>
+    <div class="row g-3">
+        {% for challenge in items %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card challenge-card h-100 {% if challenge.id in solved_ids %}solved{% endif %}">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title mb-0">{{ challenge.title }}</h5>
+                        {% if challenge.id in solved_ids %}
+                        <i class="fas fa-check-circle text-green" style="font-size: 0.9rem; margin-top: 3px;"></i>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        {% if challenge.difficulty == 'easy' %}
+                            <span class="badge badge-easy">Easy</span>
+                        {% elif challenge.difficulty == 'hard' %}
+                            <span class="badge badge-hard">Hard</span>
+                        {% else %}
+                            <span class="badge badge-medium">Medium</span>
+                        {% endif %}
+                        <span class="badge badge-points">{{ challenge.points }} pts</span>
+                    </div>
+
+                    <div class="mt-auto">
+                        <a href="{{ url_for('challenges.detail', id=challenge.id) }}" class="btn btn-sm btn-secondary">
+                            {% if challenge.id in solved_ids %}Review{% else %}Start{% endif %}
+                            <i class="fas fa-arrow-right ms-1" style="font-size: 0.7rem;"></i>
+                        </a>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-        {% else %}
-            <div class="col-12 text-center mt-5">
-                <div class="alert alert-info">
-                    <i class="fas fa-info-circle me-2"></i>No challenges available yet.
-                </div>
             </div>
+        </div>
         {% endfor %}
     </div>
+    {% else %}
+    <div class="text-center mt-5">
+        <div class="alert alert-info d-inline-block">
+            <i class="fas fa-info-circle me-2"></i>No challenges available yet.
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
