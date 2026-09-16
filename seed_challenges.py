@@ -156,7 +156,7 @@ def seed():
                 "category": "Reverse Engineering",
                 "difficulty": "hard",
                 "points": 200,
-                "flag": "egate{E5A91D0C}",
+                "flag": "egate{F66A3CAC}",
                 "hint": "You don't need to execute it, just read the assembly. It looks like it's just comparing two numbers and printing the larger one in hex."
             },
 
@@ -219,30 +219,27 @@ def seed():
             }
         ]
 
-        # Clear existing ones to cleanly replace them.
-        db.session.query(Challenge).delete()
-        db.session.commit()
-        print("Cleared old challenges.")
-
         print("Seeding new picoCTF style challenges with static files & web routes...")
 
         count = 0
         for c_data in challenges_data:
-            challenge = Challenge(
-                title=c_data["title"],
-                description=c_data["description"],
-                category=c_data["category"],
-                difficulty=c_data["difficulty"],
-                points=c_data["points"],
-                hint=c_data["hint"]
-            )
+            challenge = Challenge.query.filter_by(title=c_data["title"]).first()
+            if not challenge:
+                challenge = Challenge(title=c_data["title"])
+                db.session.add(challenge)
+            
+            challenge.description = c_data["description"]
+            challenge.category = c_data["category"]
+            challenge.difficulty = c_data["difficulty"]
+            challenge.points = c_data["points"]
+            challenge.hint = c_data["hint"]
+            
             # set_flag handles the werkzeug.security.generate_password_hash part
             challenge.set_flag(c_data["flag"])
-            db.session.add(challenge)
             count += 1
             
         db.session.commit()
-        print(f"Successfully seeded {count} picoCTF style challenges!")
+        print(f"Successfully updated/seeded {count} picoCTF style challenges!")
 
 if __name__ == "__main__":
     seed()
