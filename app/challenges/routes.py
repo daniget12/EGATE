@@ -9,7 +9,7 @@ challenges_bp = Blueprint("challenges", __name__, url_prefix="/challenges")
 def list_challenges():
     challenges = Challenge.query.all()
     # Get solved challenge IDs for current user
-    solved_ids = {uc.challenge_id for uc in UserChallenge.query.filter_by(user_id=current_user.id).all()}
+    solved_ids = [uc.challenge_id for uc in UserChallenge.query.filter_by(user_id=current_user.id).all()]
     return render_template("challenges.html", challenges=challenges, solved_ids=solved_ids)
 
 @challenges_bp.route("/<int:id>")
@@ -36,15 +36,14 @@ def submit(id):
     # Check if already solved
     existing = UserChallenge.query.filter_by(user_id=current_user.id, challenge_id=challenge.id).first()
     
-    if challenge.check_flag(flag):
-        if existing:
-            flash("You already solved this challenge.", "info")
-        else:
-            uc = UserChallenge(user_id=current_user.id, challenge_id=challenge.id)
-            current_user.points += challenge.points
-            db.session.add(uc)
-            db.session.commit()
-            flash("Correct! Points awarded.", "success")
+    if existing:
+        flash("You already solved this challenge.", "info")
+    elif challenge.check_flag(flag):
+        uc = UserChallenge(user_id=current_user.id, challenge_id=challenge.id)
+        current_user.points += challenge.points
+        db.session.add(uc)
+        db.session.commit()
+        flash("Correct! Points awarded.", "success")
     else:
         flash("Incorrect flag. Try again.", "danger")
         

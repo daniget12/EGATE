@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from flask_login import current_user, login_required
 
-from app.models import Challenge, User
+from app.models import Challenge, User, UserChallenge
 
 main_bp = Blueprint("main", __name__)
 
@@ -10,7 +10,8 @@ main_bp = Blueprint("main", __name__)
 def index():
     if current_user.is_authenticated:
         challenge_count = Challenge.query.count()
-        return render_template("dashboard.html", challenge_count=challenge_count)
+        solved_count = UserChallenge.query.filter_by(user_id=current_user.id).count()
+        return render_template("dashboard.html", challenge_count=challenge_count, solved_count=solved_count)
     return render_template("index.html")
 
 
@@ -18,7 +19,8 @@ def index():
 @login_required
 def dashboard():
     challenge_count = Challenge.query.count()
-    return render_template("dashboard.html", challenge_count=challenge_count)
+    solved_count = UserChallenge.query.filter_by(user_id=current_user.id).count()
+    return render_template("dashboard.html", challenge_count=challenge_count, solved_count=solved_count)
 
 
 @main_bp.route("/leaderboard")
