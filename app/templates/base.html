@@ -118,18 +118,18 @@
         if(typeof particlesJS !== 'undefined') {
             particlesJS('particles-js', {
                 particles: {
-                    number: { value: 30, density: { enable: true, value_area: 1200 } },
-                    color: { value: '#94a3b8' },
+                    number: { value: 50, density: { enable: true, value_area: 900 } },
+                    color: { value: '#00f0ff' },
                     shape: { type: 'circle' },
-                    opacity: { value: 0.12, random: true },
-                    size: { value: 1.5, random: true },
-                    line_linked: { enable: true, distance: 160, color: '#94a3b8', opacity: 0.06, width: 1 },
-                    move: { enable: true, speed: 0.6, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+                    opacity: { value: 0.3, random: true },
+                    size: { value: 2, random: true },
+                    line_linked: { enable: true, distance: 140, color: '#00f0ff', opacity: 0.15, width: 1 },
+                    move: { enable: true, speed: 1.5, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
                 },
                 interactivity: {
                     detect_on: 'canvas',
-                    events: { onhover: { enable: false }, onclick: { enable: false }, resize: true },
-                    modes: {}
+                    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                    modes: { grab: { distance: 120, line_linked: { opacity: 0.3 } }, push: { particles_nb: 3 } }
                 },
                 retina_detect: true
             });

@@ -7,17 +7,17 @@
     <div class="hero-content">
         <div class="hero-logo-wrap">
             <img src="{{ url_for('static', filename='images/egate-logo.png') }}"
-                 alt="EGATE Talent Center"
+                 alt="EGATE Talent Center Logo"
                  class="hero-logo">
         </div>
-        <p class="hero-tagline">Train · Hack · Compete</p>
-        <h1>Learn Cybersecurity<br>By Doing</h1>
+        <h1 class="hero-title glitch-text">Cybersecurity Learning Platform</h1>
+        <p class="hero-tagline">Train. Hack. Compete.</p>
         <p class="hero-text">
-            Hands-on CTF challenges, structured courses, and a global leaderboard.
-            Build real skills across web exploitation, cryptography, forensics, and more.
+            Practice cybersecurity skills through original CTF challenges,
+            track your progress on the leaderboard, and grow with structured courses.
         </p>
         <div class="hero-actions">
-            <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Get Started Free</a>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Get Started</a>
             <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">Sign In</a>
         </div>
 
@@ -35,32 +35,30 @@
                 <div class="stat-label">Leaderboard</div>
             </div>
         </div>
+
+        <div class="feature-grid">
+            <div class="card feature-card">
+                <div class="card-body">
+                    <i class="fas fa-flag feature-icon"></i>
+                    <h3>CTF Challenges</h3>
+                    <p>Hands-on challenges across Web, Crypto, Forensics, Reverse Engineering, and Binary Exploitation.</p>
+                </div>
+            </div>
+            <div class="card feature-card">
+                <div class="card-body">
+                    <i class="fas fa-graduation-cap feature-icon"></i>
+                    <h3>Learning Paths</h3>
+                    <p>Structured courses that take you from beginner to advanced in key cybersecurity domains.</p>
+                </div>
+            </div>
+            <div class="card feature-card">
+                <div class="card-body">
+                    <i class="fas fa-trophy feature-icon"></i>
+                    <h3>Global Leaderboard</h3>
+                    <p>Compete with other learners and climb the ranks as you solve more challenges.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
-
-<div class="container pb-5">
-    <div class="feature-grid">
-        <div class="card feature-card">
-            <div class="card-body">
-                <div class="feature-icon"><i class="fas fa-flag"></i></div>
-                <h3>CTF Challenges</h3>
-                <p>Real challenges across Web, Crypto, Forensics, Reverse Engineering, and Binary Exploitation.</p>
-            </div>
-        </div>
-        <div class="card feature-card">
-            <div class="card-body">
-                <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
-                <h3>Guided Courses</h3>
-                <p>Structured learning paths that take you from beginner to advanced in key domains.</p>
-            </div>
-        </div>
-        <div class="card feature-card">
-            <div class="card-body">
-                <div class="feature-icon"><i class="fas fa-trophy"></i></div>
-                <h3>Leaderboard</h3>
-                <p>Compete globally and track your progress as you solve challenges and earn points.</p>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}

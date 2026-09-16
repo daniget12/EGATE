@@ -3,56 +3,60 @@
 {% block title %}{{ challenge.title }} - EGATE Talent Center{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 760px;">
+<div class="container">
     <a href="{{ url_for('challenges.list_challenges') }}" class="back-link">
         <i class="fas fa-arrow-left"></i> Back to Challenges
     </a>
 
-    <h1 class="mb-3">{{ challenge.title }}</h1>
-    <div class="d-flex flex-wrap gap-2 mb-4">
-        <span class="badge badge-info">{{ challenge.category }}</span>
-        {% if challenge.difficulty == 'easy' %}
-            <span class="badge badge-easy">Easy</span>
-        {% elif challenge.difficulty == 'hard' %}
-            <span class="badge badge-hard">Hard</span>
-        {% else %}
-            <span class="badge badge-medium">Medium</span>
-        {% endif %}
-        <span class="badge badge-points">{{ challenge.points }} pts</span>
+    <div class="challenge-header">
+        <h1>{{ challenge.title }}</h1>
+        <div class="mt-3 d-flex justify-content-center gap-2 flex-wrap">
+            <span class="badge badge-info badge-category">
+                <i class="fas fa-folder me-1"></i>{{ challenge.category }}
+            </span>
+            {% if challenge.difficulty == 'easy' %}
+                <span class="badge badge-easy"><i class="fas fa-signal me-1"></i>{{ challenge.difficulty }}</span>
+            {% elif challenge.difficulty == 'hard' %}
+                <span class="badge badge-hard"><i class="fas fa-signal me-1"></i>{{ challenge.difficulty }}</span>
+            {% else %}
+                <span class="badge badge-medium"><i class="fas fa-signal me-1"></i>{{ challenge.difficulty }}</span>
+            {% endif %}
+            <span class="badge badge-points">
+                <i class="fas fa-star me-1"></i>{{ challenge.points }} pts
+            </span>
+        </div>
     </div>
 
-    <div class="card mb-4">
-        <div class="card-body">
-            <h6 class="text-muted mb-3" style="text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem;">Description</h6>
-            <div class="desc-box">{{ challenge.description | safe }}</div>
-
-            {% if is_solved %}
-            <div class="alert alert-success mt-4 mb-0">
-                <i class="fas fa-check-circle me-2"></i><strong>Solved!</strong> You've completed this challenge.
-            </div>
-            {% else %}
-            <hr class="my-4">
-            <h6 class="text-muted mb-3" style="text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem;">Submit Flag</h6>
-            <form method="POST" action="{{ url_for('challenges.submit', id=challenge.id) }}" class="flag-form">
-                <div class="d-flex gap-2">
-                    <input type="text" name="flag" class="form-control flag-input" placeholder="egate{...}" required autocomplete="off">
-                    <button type="submit" class="btn btn-flag" style="white-space: nowrap;">Submit</button>
-                </div>
-            </form>
-            {% endif %}
+    <div class="challenge-body card">
+        <div class="terminal-box">
+            {{ challenge.description | safe }}
         </div>
+
+        <hr class="my-4">
+
+        {% if is_solved %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle me-2"></i><strong>Solved!</strong> You have already completed this challenge.
+            </div>
+        {% else %}
+            <h3 class="mb-3"><i class="fas fa-key me-2"></i>Submit Flag</h3>
+            <form method="POST" action="{{ url_for('challenges.submit', id=challenge.id) }}" class="flag-form">
+                <div class="form-group">
+                    <input type="text" name="flag" class="form-control flag-input" placeholder="egate{...}" required autocomplete="off">
+                </div>
+                <button type="submit" class="btn btn-flag">
+                    <i class="fas fa-paper-plane me-2"></i>Submit Flag
+                </button>
+            </form>
+        {% endif %}
     </div>
 
     <div class="hint-section">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <h6 class="mb-1">Need a hint?</h6>
-                <p class="text-muted mb-0" style="font-size: 0.82rem;">A nudge toward the solution — not the flag itself.</p>
-            </div>
-            <button type="button" id="hint-button" class="btn btn-sm btn-secondary">
-                <i class="fas fa-lightbulb me-1"></i>Show
-            </button>
-        </div>
+        <h3><i class="fas fa-lightbulb me-2 text-warning"></i>Need a hint?</h3>
+        <p class="text-secondary mt-1" style="font-size: 0.85rem;">A nudge toward the solution — not the flag itself.</p>
+        <button type="button" id="hint-button" class="hint-button mt-2">
+            <i class="fas fa-eye me-2"></i>Reveal Hint
+        </button>
         <div id="hint-text" class="hint-text hidden"></div>
     </div>
 </div>
