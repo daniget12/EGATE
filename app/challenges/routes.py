@@ -21,7 +21,11 @@ def detail(id):
         return redirect(url_for("challenges.list_challenges"))
     
     is_solved = UserChallenge.query.filter_by(user_id=current_user.id, challenge_id=challenge.id).first() is not None
-    return render_template("challenge_detail.html", challenge=challenge, is_solved=is_solved)
+    
+    prev_challenge = Challenge.query.filter(Challenge.id < challenge.id).order_by(Challenge.id.desc()).first()
+    next_challenge = Challenge.query.filter(Challenge.id > challenge.id).order_by(Challenge.id.asc()).first()
+    
+    return render_template("challenge_detail.html", challenge=challenge, is_solved=is_solved, prev_challenge=prev_challenge, next_challenge=next_challenge)
 
 @challenges_bp.route("/<int:id>/submit", methods=["POST"])
 @login_required

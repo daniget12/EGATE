@@ -36,11 +36,11 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Defining Cybersecurity"
+                        "text": "What is Cybersecurity?"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Cybersecurity is the practice of protecting computer systems, networks, programs, and data from digital attacks, unauthorized access, and other vulnerabilities that can lead to compromise or loss. The primary objectives include ensuring the confidentiality, integrity, and availability of information."
+                        "text": "Cybersecurity is the practice of protecting computer systems, networks, programs, and data from digital attacks, unauthorized access, and other vulnerabilities that can lead to compromise or loss."
                     },
                     {
                         "type": "heading",
@@ -48,7 +48,7 @@ COURSES = [
                     },
                     {
                         "type": "paragraph",
-                        "text": "The CIA Triad is a foundational model in cybersecurity that represents the three core principles for securing information systems: Confidentiality, Integrity, and Availability."
+                        "text": "The CIA Triad is the foundational model for securing information systems. It represents three core principles:"
                     },
                     {
                         "type": "table",
@@ -77,46 +77,21 @@ COURSES = [
                     },
                     {
                         "type": "heading",
-                        "text": "Threat Actors"
+                        "text": "The Threat Landscape"
                     },
                     {
-                        "type": "table",
-                        "headers": [
-                            "Threat Actor Type",
-                            "Description",
-                            "Example"
-                        ],
-                        "rows": [
-                            [
-                                "Script Kiddies",
-                                "Novice hackers using existing tools",
-                                "Defacement attacks"
-                            ],
-                            [
-                                "Insiders",
-                                "Individuals with legitimate access abusing it",
-                                "Data theft by employees"
-                            ],
-                            [
-                                "Organized Crime",
-                                "Groups acting for financial gain",
-                                "Banking malware rings"
-                            ],
-                            [
-                                "APTs",
-                                "Sophisticated, well-funded, often state-sponsored",
-                                "Stuxnet, SolarWinds"
-                            ]
+                        "type": "bullets",
+                        "items": [
+                            "Malware \u2014 viruses, worms, trojans",
+                            "Phishing \u2014 social engineering to steal credentials",
+                            "Ransomware \u2014 encrypts data and demands payment",
+                            "Social Engineering \u2014 exploiting human psychology"
                         ]
                     },
                     {
-                        "type": "heading",
-                        "text": "Risk Calculation"
-                    },
-                    {
                         "type": "callout",
-                        "variant": "warning",
-                        "text": "Risk is often quantified using the formula: Risk = Threat \u00d7 Vulnerability \u00d7 Impact. By assessing each factor, organizations can calculate a risk score to prioritize security efforts."
+                        "variant": "info",
+                        "text": "Every attack targets one or more pillars of the CIA Triad. Ask yourself: is the attacker trying to read data (Confidentiality), change data (Integrity), or block access (Availability)?"
                     }
                 ]
             },
@@ -150,98 +125,77 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "OSI Model (7 Layers)"
+                        "text": "OSI vs TCP/IP Models"
                     },
                     {
                         "type": "paragraph",
-                        "text": "The Open Systems Interconnection (OSI) Model is a conceptual framework used to understand and standardize how different networking protocols interact across seven distinct layers."
+                        "text": "Networking relies on structured models to ensure seamless communication across different hardware and software."
                     },
                     {
                         "type": "table",
                         "headers": [
-                            "Layer",
-                            "Function",
-                            "Example Protocols"
+                            "OSI Layer",
+                            "TCP/IP Layer",
+                            "Function"
                         ],
                         "rows": [
                             [
+                                "7. Application",
                                 "Application",
-                                "User-facing network services",
-                                "HTTP, FTP, SMTP"
+                                "End-user processes (HTTP, FTP)"
                             ],
                             [
-                                "Presentation",
-                                "Data formatting, encryption, compression",
-                                "SSL, JPEG"
+                                "6. Presentation",
+                                "Application",
+                                "Data representation and encryption"
                             ],
                             [
-                                "Session",
-                                "Establishes, manages & terminates sessions",
-                                "NetBIOS, RPC"
+                                "5. Session",
+                                "Application",
+                                "Interhost communication"
                             ],
                             [
+                                "4. Transport",
                                 "Transport",
-                                "Reliable data transfer, segmentation, error check",
-                                "TCP, UDP"
+                                "End-to-end connections (TCP, UDP)"
                             ],
                             [
-                                "Network",
-                                "Logical addressing & routing",
-                                "IP, ICMP"
+                                "3. Network",
+                                "Internet",
+                                "Path determination and IP addressing"
                             ],
                             [
-                                "Data Link",
-                                "Node-to-node data transfer, MAC addressing",
-                                "Ethernet, PPP"
+                                "2. Data Link",
+                                "Network Access",
+                                "MAC addressing and switching"
                             ],
                             [
-                                "Physical",
-                                "Transmission of raw bits over medium",
-                                "Ethernet cables"
+                                "1. Physical",
+                                "Network Access",
+                                "Media, signal and binary transmission"
                             ]
                         ]
                     },
                     {
                         "type": "heading",
-                        "text": "TCP/IP Model"
+                        "text": "IP Addressing"
                     },
                     {
                         "type": "paragraph",
-                        "text": "The TCP/IP model condenses networking functions into four layers (Application, Transport, Internet, Network Access) that reflect how data flows across the Internet and other networks."
+                        "text": "IP addresses uniquely identify devices on a network. We primarily use IPv4 (32-bit) and IPv6 (128-bit)."
                     },
                     {
-                        "type": "heading",
-                        "text": "IP Addressing Basics"
-                    },
-                    {
-                        "type": "table",
-                        "headers": [
-                            "Feature",
-                            "IPv4",
-                            "IPv6"
-                        ],
-                        "rows": [
-                            [
-                                "Length",
-                                "32 bits (e.g., 192.168.1.1)",
-                                "128 bits (e.g., 2001:0db8:85a3::8a2e:370:7334)"
-                            ],
-                            [
-                                "Address Pool",
-                                "~4.3 billion unique addresses",
-                                "340 undecillion addresses"
-                            ],
-                            [
-                                "Security",
-                                "Optional IPsec",
-                                "Mandatory IPsec"
-                            ]
+                        "type": "bullets",
+                        "items": [
+                            "IPv4 Example: 192.168.1.1",
+                            "IPv6 Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+                            "Subnetting divides a larger network into smaller, manageable sub-networks."
                         ]
                     },
                     {
                         "type": "callout",
-                        "variant": "info",
-                        "text": "Subnetting is the process of dividing a large network into smaller, more manageable segments. It enhances network performance and increases security by isolating groups of devices."
+                        "variant": "warning",
+                        "text": "IPv4 addresses are exhausted! That's why NAT (Network Address Translation) and IPv6 were developed."
                     }
                 ]
             },
@@ -274,87 +228,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "HTTP vs. HTTPS"
-                    },
-                    {
-                        "type": "table",
-                        "headers": [
-                            "Feature",
-                            "HTTP",
-                            "HTTPS"
-                        ],
-                        "rows": [
-                            [
-                                "Port",
-                                "80",
-                                "443"
-                            ],
-                            [
-                                "Encryption",
-                                "None",
-                                "SSL/TLS"
-                            ],
-                            [
-                                "Security",
-                                "Unencrypted",
-                                "Encrypted and authenticated"
-                            ],
-                            [
-                                "Use Case",
-                                "Public content",
-                                "Sensitive transactions, login"
-                            ]
-                        ]
-                    },
-                    {
-                        "type": "heading",
-                        "text": "DNS (Domain Name System)"
+                        "text": "Packet Analysis Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "The function of DNS is to translate human-readable domain names into machine-readable IP addresses to enable network communication."
-                    },
-                    {
-                        "type": "table",
-                        "headers": [
-                            "Record Type",
-                            "Purpose"
-                        ],
-                        "rows": [
-                            [
-                                "A",
-                                "Maps a domain to an IPv4 address"
-                            ],
-                            [
-                                "AAAA",
-                                "Maps a domain to an IPv6 address"
-                            ],
-                            [
-                                "CNAME",
-                                "Alias for another domain (canonical name)"
-                            ],
-                            [
-                                "MX",
-                                "Identifies the mail exchange server for email delivery"
-                            ]
-                        ]
+                        "text": "This module covers the essential principles, tools, and methodologies required to master packet analysis. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "ARP (Address Resolution Protocol)"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "ARP maps an IP address (Layer 3) to a MAC address (Layer 2) on a LAN.",
-                            "It is used in Ethernet and Wi-Fi networks.",
-                            "It is required for any communication within a local subnet."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
+                        ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
                         ]
                     },
                     {
                         "type": "callout",
-                        "variant": "danger",
-                        "text": "Security Risk: Malicious devices can send fake ARP replies to associate their MAC with another device's IP (man-in-the-middle attack)."
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -387,66 +307,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Attack Techniques Overview"
+                        "text": "Common Attack Techniques Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Understanding how attackers map networks and intercept communications is vital. This module covers reconnaissance methods and Man-in-the-Middle (MITM) attacks."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master common attack techniques. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "MITM and ARP Spoofing"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Use tools like arpspoof or ettercap to perform ARP poisoning.",
-                            "Intercept unencrypted HTTP traffic flowing through the network.",
-                            "Capture credentials and session cookies with Wireshark."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
-                    },
-                    {
-                        "type": "heading",
-                        "text": "Scanning and Enumeration"
-                    },
-                    {
-                        "type": "paragraph",
-                        "text": "Nmap is the premier tool for network discovery and security auditing."
                     },
                     {
                         "type": "table",
                         "headers": [
-                            "Scan Type",
-                            "Description",
-                            "Example Command"
+                            "Concept",
+                            "Application",
+                            "Relevance"
                         ],
                         "rows": [
                             [
-                                "TCP SYN Scan",
-                                "Sends SYN packets to ports, waits for SYN-ACK",
-                                "nmap -sS 192.168.1.0/24"
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
                             ],
                             [
-                                "OS Fingerprinting",
-                                "Attempts to identify OS and version",
-                                "nmap -O target_ip"
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
                             ],
                             [
-                                "Service Detection",
-                                "Identifies software and versions running on ports",
-                                "nmap -sV target_ip"
-                            ],
-                            [
-                                "Aggressive Scan",
-                                "Combines OS detection, version detection, and scripts",
-                                "nmap -A target_ip"
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
                             ]
                         ]
                     },
                     {
                         "type": "callout",
                         "variant": "info",
-                        "text": "Always ensure you have explicit written authorization before conducting scanning or spoofing activities against any network."
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -475,29 +382,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Defensive Measures"
+                        "text": "Network Defense and Security Measures Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Organizations implement defensive measures to secure networks and systems against intrusions. These defenses operate at various layers of the network stack to detect, prevent, and respond to threats."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master network defense and security measures. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Key Defensive Strategies"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Firewalls: Filter traffic based on predefined rules (IPs, ports, protocols).",
-                            "Intrusion Detection Systems (IDS): Monitor network traffic for suspicious activity and alert administrators.",
-                            "Intrusion Prevention Systems (IPS): Actively block or prevent detected intrusions.",
-                            "Network Segmentation: Dividing a network into smaller, isolated subnets to limit exposure."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
+                        ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
                         ]
                     },
                     {
                         "type": "callout",
                         "variant": "info",
-                        "text": "Good network segmentation limits lateral movement. A flat network topology is highly vulnerable during an attack because a compromise of one device provides access to all others."
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -525,28 +456,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Lab Environment Setup"
+                        "text": "Virtual Lab Setup and Simulation Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "A secure, isolated lab environment is essential for analyzing network traffic and safely practicing cyber-attacks and defenses without risking production systems."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master virtual lab setup and simulation. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Setup Requirements"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Install and configure Kali Linux as the attacker machine.",
-                            "Use virtualization platforms like VirtualBox or VMware.",
-                            "Build and configure network topologies using tools like GNS3 or packet tracer."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
+                        ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
                         ]
                     },
                     {
                         "type": "callout",
                         "variant": "info",
-                        "text": "Simulating secured and unsecured network environments side-by-side allows learners to compare traffic (e.g., HTTP vs HTTPS) and understand the practical value of encryption and secure protocols."
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             }
@@ -586,28 +542,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "User & Group Policies"
+                        "text": "User & Group Policies Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Windows provides powerful tools for configuring user rights, account policies, and file access. Understanding and configuring user and group policies is foundational to securing a Windows system."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master user & group policies. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Key Tools and Concepts"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Configuring Local Security Policy (secpol.msc)",
-                            "Managing NTFS (New Technology File System) & Share Permissions",
-                            "Enforcing password length, complexity, and expiration policies via gpedit.msc"
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
+                        ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
                         ]
                     },
                     {
                         "type": "callout",
                         "variant": "info",
-                        "text": "Proper access control using Group Policy and NTFS permissions is critical for protecting sensitive data from unauthorized local or network access."
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -640,28 +621,49 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Windows Defender & Firewall"
+                        "text": "Windows Defender Overview"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Windows Defender is an integrated anti-malware component that provides real-time protection. The Windows Firewall filters network data transmissions to and from your Windows system using a set of rules."
+                        "text": "Windows Defender is an integrated anti-malware component of Windows. It provides real-time protection against software threats like viruses, malware, and spyware across email, apps, the cloud, and the web."
                     },
                     {
                         "type": "heading",
-                        "text": "Firewall Configuration"
+                        "text": "Windows Firewall"
                     },
                     {
-                        "type": "bullets",
-                        "items": [
-                            "Enabling real-time protection against spyware and malware.",
-                            "Creating custom inbound and outbound firewall rules.",
-                            "Blocking unnecessary inbound traffic, such as RDP (Remote Desktop Protocol) or ICMP (Ping)."
+                        "type": "paragraph",
+                        "text": "The Windows Firewall filters network data transmissions to and from your Windows system. It relies on a set of rules to determine what traffic is allowed."
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Rule Type",
+                            "Description",
+                            "Usage"
+                        ],
+                        "rows": [
+                            [
+                                "Inbound",
+                                "Controls traffic coming into the system.",
+                                "Block untrusted incoming connections (e.g., block external RDP)."
+                            ],
+                            [
+                                "Outbound",
+                                "Controls traffic originating from the system.",
+                                "Prevent malware from phoning home."
+                            ],
+                            [
+                                "Connection Security",
+                                "Secures traffic using IPsec.",
+                                "Encrypt data between two specific servers."
+                            ]
                         ]
                     },
                     {
                         "type": "callout",
                         "variant": "danger",
-                        "text": "Never disable the firewall completely! Instead, create specific exceptions for the legitimate services your system needs to run."
+                        "text": "Never disable the firewall completely! Instead, create specific exceptions for the services you need."
                     }
                 ]
             },
@@ -689,23 +691,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Patch Management"
+                        "text": "Patch Management Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Patch management is the process of distributing and applying updates to software. Keeping systems secure by regularly applying updates is one of the most effective defenses against known vulnerabilities."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master patch management. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Tools and Practices"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Applying service packs, security rollups, and hotfixes.",
-                            "Using Windows Update for individual machines and WSUS (Windows Server Update Services) for enterprise management.",
-                            "Running Microsoft Baseline Security Analyzer (MBSA) or similar modern scanning tools to identify missing patches."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -733,23 +765,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Active Directory Security"
+                        "text": "Active Directory Security Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Active Directory (AD) is a directory service developed by Microsoft for Windows domain networks. It manages computers and other devices on a network and enforces security policies centrally."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master active directory security. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Key Components"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Group Policy Objects (GPOs) for enterprise-wide enforcement of registry settings, security options, and software installation.",
-                            "Securing AD infrastructure by limiting Domain Admin access.",
-                            "Auditing AD changes to detect privilege escalation."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -777,23 +839,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "PowerShell Security Automation"
+                        "text": "PowerShell for Security Automation Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "PowerShell is a task automation and configuration management framework. It provides full access to COM and WMI, enabling administrators to execute complex security audits and tasks automatically."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master powershell for security automation. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Capabilities"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Scripting automated user and group privilege audits.",
-                            "Parsing and analyzing Event Viewer logs at scale.",
-                            "Enforcing security baselines across multiple servers rapidly."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -821,23 +913,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Backup & Recovery"
+                        "text": "Backup & Recovery Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "A robust backup strategy ensures data availability and business continuity in the event of hardware failures, accidental deletion, or destructive attacks like ransomware."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master backup & recovery. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Disaster Recovery Tools"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Windows Backup for creating image-based or file-level backups of critical systems.",
-                            "System Restore for rolling back the operating system state, registries, and drivers to a known-good point.",
-                            "Testing backups regularly to ensure data can actually be recovered when needed."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             }
@@ -877,57 +999,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "User and Group Accounts"
+                        "text": "Permissions & User Management Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "User accounts are essential components of Linux operating systems, providing the foundation for user access, security, and system management. Each login session is tied to a specific user identity, enabling the OS to enforce user-specific policies."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master permissions & user management. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Account Information Files"
-                    },
-                    {
-                        "type": "table",
-                        "headers": [
-                            "File",
-                            "Description"
-                        ],
-                        "rows": [
-                            [
-                                "/etc/passwd",
-                                "Primary file storing basic user account details (UID, GID, home directory)."
-                            ],
-                            [
-                                "/etc/shadow",
-                                "Holds hashed user passwords and password-related metadata. Readable only by root."
-                            ],
-                            [
-                                "/etc/group",
-                                "Contains group account data specifying which users belong to which groups."
-                            ],
-                            [
-                                "/etc/gshadow",
-                                "Stores secure group password data and administrative permissions."
-                            ]
-                        ]
-                    },
-                    {
-                        "type": "heading",
-                        "text": "User Private Groups (UPGs)"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "A new group is automatically created for each user when the user account is created.",
-                            "Each user's files are owned by a private group, isolating access.",
-                            "Ensures better default file security compared to traditional shared groups."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
+                        ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
                         ]
                     },
                     {
                         "type": "callout",
-                        "variant": "warning",
-                        "text": "The root user has UID 0 and holds superuser privileges. Audit all users with UID 0 to detect potential unauthorized access."
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -955,49 +1073,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Disabling Services and Securing Access"
+                        "text": "Service Hardening Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Service hardening involves minimizing the attack surface by disabling unnecessary services (using systemctl disable) and securing essential ones like SSH. Best practices for SSH include using key-based authentication and disabling root login."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master service hardening. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "PAM (Pluggable Authentication Modules)"
+                        "text": "Core Principles"
                     },
                     {
-                        "type": "paragraph",
-                        "text": "PAM is a powerful tool that allows an administrator to provide restrictions to user accounts, such as limiting access by time or resource utilization. It is called by authentication-based software like local login and SSH."
+                        "type": "bullets",
+                        "items": [
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
+                        ]
                     },
                     {
                         "type": "table",
                         "headers": [
-                            "PAM Category",
-                            "Description"
+                            "Concept",
+                            "Application",
+                            "Relevance"
                         ],
                         "rows": [
                             [
-                                "account",
-                                "Verifies if a user account has the rights to use a service."
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
                             ],
                             [
-                                "auth",
-                                "Authenticates that the user is who they claim to be."
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
                             ],
                             [
-                                "password",
-                                "Updates authentication methods like providing a new password."
-                            ],
-                            [
-                                "session",
-                                "Performs actions prior to and after a service has been provided."
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
                             ]
                         ]
                     },
                     {
                         "type": "callout",
-                        "variant": "danger",
-                        "text": "Be very careful when changing PAM configuration files. Misconfigurations can easily lock the root account out of the system!"
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -1025,23 +1147,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Mandatory Access Control"
+                        "text": "Mandatory Access Control (MAC) Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Mandatory Access Control (MAC) systems, such as SELinux and AppArmor, enforce security policies that confine user programs and system services to the minimum amount of privilege they require to function."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master mandatory access control (mac). Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Implementation Details"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "SELinux assigns security contexts to files and processes, ensuring that a compromised service cannot access unauthorized files.",
-                            "AppArmor uses file paths to restrict programs' capabilities.",
-                            "You can configure SELinux policies to restrict web servers like Apache or Nginx strictly to their document roots."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -1069,23 +1221,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Firewalls and Traffic Filtering"
+                        "text": "Network Security Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Network security on Linux involves configuring robust firewalls to block unauthorized access while allowing legitimate traffic."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master network security. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Tools"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "iptables and nftables: Powerful command-line tools for packet filtering and NAT.",
-                            "UFW (Uncomplicated Firewall): A user-friendly frontend for managing iptables rules.",
-                            "Common configurations include allowing SSH (port 22) and Web traffic (ports 80/443) while dropping all other incoming connections."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -1113,23 +1295,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "File Integrity Monitoring"
+                        "text": "File Integrity & Monitoring Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "File Integrity Monitoring (FIM) tools are used to detect unauthorized changes to critical system files, which could indicate a compromise or malware installation."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master file integrity & monitoring. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Common Tools"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "AIDE (Advanced Intrusion Detection Environment) takes a snapshot of file hashes and permissions, then regularly checks the live system against this baseline.",
-                            "Tripwire operates similarly, alerting administrators to unexpected modifications in directories like /etc and /bin.",
-                            "md5sum or sha256sum can be used manually to verify the integrity of individual files."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -1157,28 +1369,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Container Security"
+                        "text": "Container Security Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Securing containerized environments involves running containers with the least required privileges to prevent container breakouts."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master container security. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Hardening Techniques"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Dropping Linux capabilities using '--cap-drop' to remove unnecessary privileges from the container root user.",
-                            "Running containers with a read-only filesystem to prevent attackers from writing malicious payloads.",
-                            "Ensuring Docker daemon is properly secured and not exposed without authentication."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
+                        ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
                         ]
                     },
                     {
                         "type": "callout",
                         "variant": "info",
-                        "text": "Always run a container with minimal privileges to reduce the impact of a potential compromise."
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             }
@@ -1223,24 +1460,53 @@ COURSES = [
                     },
                     {
                         "type": "paragraph",
-                        "text": "Understand the differences between hashing and encryption, and the common algorithms used for each. Encryption is a two-way process for confidentiality, while hashing is a one-way process for data integrity."
+                        "text": "While both use cryptography to protect data, they serve different purposes. Encryption is a two-way function designed to hide data, while hashing is a one-way function meant to verify integrity."
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Feature",
+                            "Hashing",
+                            "Encryption"
+                        ],
+                        "rows": [
+                            [
+                                "Direction",
+                                "One-way (irreversible)",
+                                "Two-way (reversible)"
+                            ],
+                            [
+                                "Output",
+                                "Fixed length (e.g., 256 bits)",
+                                "Variable length (depends on input)"
+                            ],
+                            [
+                                "Primary Goal",
+                                "Data Integrity",
+                                "Data Confidentiality"
+                            ],
+                            [
+                                "Examples",
+                                "MD5, SHA-1, SHA-256",
+                                "AES, RSA, DES"
+                            ]
+                        ]
                     },
                     {
                         "type": "heading",
-                        "text": "Core Concepts"
+                        "text": "Symmetric vs Asymmetric Encryption"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Compare MD5, SHA-1, and SHA-256 hashing functions. Note that MD5 is considered cryptographically broken.",
-                            "Symmetric vs Asymmetric Encryption: Symmetric uses one key (AES), while asymmetric uses a public/private key pair (RSA).",
-                            "Encrypt and decrypt files using GPG and OpenSSL."
+                            "Symmetric Encryption: Uses a single shared key for both encryption and decryption (e.g., AES). It's fast but requires secure key exchange.",
+                            "Asymmetric Encryption: Uses a key pair (public key to encrypt, private key to decrypt) (e.g., RSA). It's slower but solves the key exchange problem."
                         ]
                     },
                     {
                         "type": "callout",
-                        "variant": "warning",
-                        "text": "Never use MD5 or SHA-1 for securing new data. Always opt for modern standards like SHA-256 or SHA-3."
+                        "variant": "info",
+                        "text": "MD5 and SHA-1 are considered cryptographically broken. Always use SHA-256 or better for secure hashing."
                     }
                 ]
             },
@@ -1273,23 +1539,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "TLS Protocol"
+                        "text": "TLS Protocol and Encrypted Communication Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Transport Layer Security (TLS) ensures encrypted communication over a network, providing confidentiality, data integrity, and authentication."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master tls protocol and encrypted communication. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Implementation and Analysis"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Analyze the TLS handshake process using Wireshark to understand how keys are exchanged securely.",
-                            "Exchange encrypted and signed emails using GPG to learn how PGP web of trust works.",
-                            "Understand Public Key Infrastructure (PKI) basics, including Certificate Authorities (CAs)."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -1322,28 +1618,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Password Security"
+                        "text": "Secure Password Creation and Password Cracking Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Creating secure passwords and testing their strength against cracking tools is essential for credential security and policy enforcement."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master secure password creation and password cracking. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Tools and Methods"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Offline password cracking using tools like John the Ripper or Hashcat.",
-                            "Understanding different password hashing formats (e.g., bcrypt, SHA-512 crypt) and the role of salts.",
-                            "Developing password policies that resist dictionary and brute-force attacks."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
+                        ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
                         ]
                     },
                     {
                         "type": "callout",
                         "variant": "info",
-                        "text": "Always use strong, complex passwords combined with Multi-Factor Authentication (MFA) to fully protect critical accounts."
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             }
@@ -1389,23 +1710,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "OWASP Top 10"
+                        "text": "OWASP Top 10 Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "The OWASP Top 10 is a standard awareness document for developers and web application security. It represents a broad consensus about the most critical security risks to web applications."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master owasp top 10. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Primary Vulnerabilities"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "SQL Injection (SQLi): Occurs when untrusted data is sent to an interpreter as part of a command or query.",
-                            "Cross-Site Scripting (XSS): Occurs when an application includes untrusted data in a web page without proper validation or escaping.",
-                            "Exploiting vulnerable web apps (e.g., DVWA) in a safe lab environment to understand attacker methodology."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -1443,23 +1794,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Session Hijacking"
+                        "text": "Session Hijacking and Cookie Manipulation Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Session hijacking involves exploiting a valid computer session to gain unauthorized access to information or services in a computer system."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master session hijacking and cookie manipulation. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Attack Techniques"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Using interception proxies like OWASP ZAP or Burp Suite to capture and inspect HTTP requests.",
-                            "Manipulating session cookies to bypass authentication controls.",
-                            "Understanding mitigation strategies like Secure and HttpOnly cookie flags."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -1497,23 +1878,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Secure Login Systems"
+                        "text": "Secure Login Systems Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Building secure authentication mechanisms requires proper implementation of transport layer encryption and secure storage of user credentials."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master secure login systems. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Best Practices"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Enforce HTTPS across all authentication endpoints to prevent credential sniffing.",
-                            "Hash passwords securely using modern algorithms like bcrypt or Argon2, incorporating unique salts for every user.",
-                            "Implement account lockout mechanisms to prevent brute-force attacks."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             }
@@ -1559,23 +1970,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Reconnaissance"
+                        "text": "Passive and Active Reconnaissance Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Reconnaissance is the first phase of ethical hacking, involving gathering information about a target before launching an attack. This data informs the strategy for the rest of the penetration test."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master passive and active reconnaissance. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Information Gathering"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Conduct passive information gathering using public records (WHOIS, DNS records) to map the target's external footprint.",
-                            "Utilize advanced search engine operators (Google Dorking) to find exposed files and sensitive information.",
-                            "Perform active footprinting and banner grabbing to identify service versions running on open ports."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -1613,23 +2054,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Scanning and Enumeration"
+                        "text": "Scanning and Enumeration Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "After reconnaissance, attackers scan the network to discover live hosts, open ports, and running services. Enumeration extracts detailed information such as user names, machine names, and network resources."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master scanning and enumeration. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Techniques and Tools"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Perform scanning and service enumeration using tools like Nmap and Netcat.",
-                            "Extract SMB shares, SNMP data, and user lists from target machines.",
-                            "Analyze and document service enumeration results to identify potential exploitation vectors."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -1668,23 +2139,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "System Exploitation"
+                        "text": "Brute Force Attacks and System Exploitation Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Exploitation involves taking advantage of discovered vulnerabilities to gain unauthorized access to a system or application."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master brute force attacks and system exploitation. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Exploitation Methods"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Run online brute force login attacks against services (e.g., SSH, FTP) using THC Hydra.",
-                            "Work with the Metasploit Framework to select and deploy pre-packaged exploits against vulnerable targets.",
-                            "Understand payload generation, reverse shells, and post-exploitation basics."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             },
@@ -1722,23 +2223,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "CTF Practice"
+                        "text": "CTF Practice Challenge Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Capture The Flag (CTF) challenges simulate real-world scenarios to practice and refine ethical hacking skills in a legal, safe environment."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master ctf practice challenge. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Challenge Objectives"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Complete mini CTFs covering web exploitation, cryptography, reverse engineering, and forensics.",
-                            "Document and report all captured flags alongside the specific exploit methods used.",
-                            "Identify vulnerabilities and recover forensic evidence."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
                         ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "callout",
+                        "variant": "info",
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             }
@@ -1784,30 +2315,53 @@ COURSES = [
                 "content": [
                     {
                         "type": "heading",
-                        "text": "Capstone Project"
+                        "text": "Capstone: Final Team-Based CTF Challenge Concepts"
                     },
                     {
                         "type": "paragraph",
-                        "text": "Apply all acquired cybersecurity knowledge and tools to complete a structured Red vs Blue CTF scenario in teams. This capstone serves as a showcase project for academic advancement or internships."
+                        "text": "This module covers the essential principles, tools, and methodologies required to master capstone: final team-based ctf challenge. Understanding these concepts is critical for modern cybersecurity operations."
                     },
                     {
                         "type": "heading",
-                        "text": "Example Capstone Topics"
+                        "text": "Core Principles"
                     },
                     {
                         "type": "bullets",
                         "items": [
-                            "Build a secure login system with multi-factor authentication.",
-                            "Create a vulnerable app for ethical hacking and patch tracking.",
-                            "Perform malware analysis and generate detection rules.",
-                            "Simulate and document a wireless penetration test.",
-                            "Develop and test a phishing awareness toolkit."
+                            "Identify vulnerabilities and misconfigurations.",
+                            "Apply best practices for secure deployment.",
+                            "Utilize industry-standard tools effectively."
+                        ]
+                    },
+                    {
+                        "type": "table",
+                        "headers": [
+                            "Concept",
+                            "Application",
+                            "Relevance"
+                        ],
+                        "rows": [
+                            [
+                                "Analysis",
+                                "Reviewing system states and logs",
+                                "High"
+                            ],
+                            [
+                                "Implementation",
+                                "Applying secure configurations",
+                                "Critical"
+                            ],
+                            [
+                                "Validation",
+                                "Testing applied controls",
+                                "Medium"
+                            ]
                         ]
                     },
                     {
                         "type": "callout",
                         "variant": "info",
-                        "text": "Learners will demonstrate practical mastery of cybersecurity concepts, tools, and teamwork in a simulated real-world challenge. Full documentation of flags and methodologies is required."
+                        "text": "Remember to review the external practice links to gain hands-on experience with these concepts."
                     }
                 ]
             }
