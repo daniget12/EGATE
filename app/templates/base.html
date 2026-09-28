@@ -105,6 +105,65 @@
         {% block content %}{% endblock %}
     </div>
 
+    <!-- AI Helper Floating Widget -->
+    <style>
+        .ai-helper-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1050;
+        }
+        .ai-helper-btn {
+            border-radius: 50px;
+            padding: 12px 24px;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .ai-helper-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+        }
+    </style>
+    <div class="ai-helper-widget">
+        <button class="btn btn-primary ai-helper-btn" data-bs-toggle="modal" data-bs-target="#aiHelperModal">
+            <i class="fas fa-robot"></i> AI Helper
+        </button>
+    </div>
+
+    <!-- AI Helper Modal -->
+    <div class="modal fade" id="aiHelperModal" tabindex="-1" aria-labelledby="aiHelperModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="background: rgba(10, 15, 30, 0.95); border: 1px solid #00f0ff;">
+                <div class="modal-header" style="border-bottom: 1px solid rgba(0, 240, 255, 0.2);">
+                    <h5 class="modal-title text-info" id="aiHelperModalLabel"><i class="fas fa-robot me-2"></i>EGATE AI Helper</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="min-height: 300px; max-height: 500px; overflow-y: auto;">
+                    <div class="alert alert-info" style="background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.3); color: #e2e8f0;">
+                        <strong>Hello!</strong> I am your EGATE AI Helper. I'm here to assist you with your fields of study, from Cybersecurity to STEM and Emerging Technologies. How can I help you today?
+                    </div>
+                    <!-- Placeholder chat interface -->
+                    <div class="chat-container mt-3">
+                        <div class="text-center text-muted mt-5">
+                            <i class="fas fa-comment-dots fa-3x mb-3"></i>
+                            <p>Intelligent AI responses are currently being integrated for the upcoming release.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid rgba(0, 240, 255, 0.2);">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-dark text-light border-info" placeholder="Ask me about your courses..." disabled>
+                        <button class="btn btn-outline-info" type="button" disabled><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer mt-auto py-3">
         <div class="container text-center">
             <span class="text-secondary">&copy; 2026 EGATE Talent Center &mdash; Cybersecurity Learning Platform</span>
